@@ -21,6 +21,9 @@ const cmd = command(
   flag('--keychain <name>', 'The macOS signing keychain'),
   flag('--entitlements <path>', 'The macOS signing entitlements'),
   flag('--hardened-runtime', 'Enable the macOS hardened runtime'),
+  flag('--subject <id>', 'The Windows signing subject'),
+  flag('--subject-name <name>', 'The Windows signing subject friendly name'),
+  flag('--thumbprint <sha1>', 'The Windows signing subject thumbprint'),
   async (cmd) => {
     const { entry } = cmd.args
     const {
@@ -36,7 +39,10 @@ const cmd = command(
       identity,
       keychain,
       entitlements,
-      hardenedRuntime
+      hardenedRuntime,
+      subject,
+      subjectName,
+      thumbprint
     } = cmd.flags
 
     if (version) return console.log(`v${pkg.version}`)
@@ -54,7 +60,10 @@ const cmd = command(
         identity,
         keychain,
         entitlements,
-        hardenedRuntime
+        hardenedRuntime,
+        subject,
+        subjectName,
+        thumbprint
       })
     } catch (err) {
       if (err) console.error(err)
