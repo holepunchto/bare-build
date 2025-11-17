@@ -10,9 +10,14 @@ const linux = require('./lib/platform/linux')
 const windows = require('./lib/platform/windows')
 
 module.exports = async function build(entry, opts = {}) {
-  const { base = path.resolve('.'), target = [], hosts = target } = opts
+  const { base = '.', target = [], hosts = target } = opts
 
-  const pkg = require(path.join(base, 'package.json'))
+  let pkg
+  try {
+    pkg = require(path.resolve(base, 'package.json'))
+  } catch {
+    pkg = {}
+  }
 
   let bundle = await pack(
     pathToFileURL(entry),

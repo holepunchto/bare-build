@@ -16,9 +16,28 @@ const cmd = command(
   flag('--identifier <id>', 'The unique application identifier'),
   flag('--target|-t <host>', 'The host to target').multiple(),
   flag('--out|-o <dir>', 'The output directory'),
+  flag('--sign', 'Sign the application'),
+  flag('--identity <id>', 'The macOS signing identity'),
+  flag('--keychain <name>', 'The macOS signing keychain'),
+  flag('--entitlements <path>', 'The macOS signing entitlements'),
+  flag('--hardened-runtime', 'Enable the macOS hardened runtime'),
   async (cmd) => {
     const { entry } = cmd.args
-    const { version, name, author, description, icon, identifier, target, out } = cmd.flags
+    const {
+      version,
+      name,
+      author,
+      description,
+      icon,
+      identifier,
+      target,
+      out,
+      sign,
+      identity,
+      keychain,
+      entitlements,
+      hardenedRuntime
+    } = cmd.flags
 
     if (version) return console.log(`v${pkg.version}`)
 
@@ -30,7 +49,12 @@ const cmd = command(
         icon,
         identifier,
         target,
-        out
+        out,
+        sign,
+        identity,
+        keychain,
+        entitlements,
+        hardenedRuntime
       })
     } catch (err) {
       if (err) console.error(err)
