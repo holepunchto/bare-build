@@ -15,6 +15,10 @@
       "bare": "bare-fs",
       "default": "fs"
     },
+    "os": {
+      "bare": "bare-os",
+      "default": "os"
+    },
     "path": {
       "bare": "bare-path",
       "default": "path"
@@ -52,6 +56,7 @@
     "bare-fs": "^4.5.1",
     "bare-link": "^1.5.5",
     "bare-module-traverse": "^1.8.1",
+    "bare-os": "^3.6.2",
     "bare-pack": "^1.5.1",
     "bare-path": "^3.0.0",
     "bare-subprocess": "^5.1.5",
