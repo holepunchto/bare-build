@@ -35,6 +35,7 @@ Options include:
 ```js
 options = {
   name: pkg.name,
+  version: pkg.version,
   author: pkg.author,
   description: pkg.description,
   icon,
