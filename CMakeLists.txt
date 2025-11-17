@@ -56,7 +56,7 @@ if(WIN32)
   file(GENERATE OUTPUT "runtime.manifest" CONTENT "${manifest}" NEWLINE_STYLE WIN32)
 
   target_sources(
-    ${target}
+    bare_build
     PRIVATE
       "${CMAKE_CURRENT_BINARY_DIR}/runtime.manifest"
   )
