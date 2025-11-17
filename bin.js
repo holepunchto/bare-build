@@ -24,6 +24,7 @@ const cmd = command(
   flag('--subject <id>', 'The Windows signing subject'),
   flag('--subject-name <name>', 'The Windows signing subject friendly name'),
   flag('--thumbprint <sha1>', 'The Windows signing subject thumbprint'),
+  flag('--key <hash>', 'The GPG signing key'),
   async (cmd) => {
     const { entry } = cmd.args
     const {
@@ -42,7 +43,8 @@ const cmd = command(
       hardenedRuntime,
       subject,
       subjectName,
-      thumbprint
+      thumbprint,
+      key
     } = cmd.flags
 
     if (version) return console.log(`v${pkg.version}`)
@@ -63,7 +65,8 @@ const cmd = command(
         hardenedRuntime,
         subject,
         subjectName,
-        thumbprint
+        thumbprint,
+        key
       })
     } catch (err) {
       if (err) console.error(err)
