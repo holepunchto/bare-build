@@ -1,0 +1,8 @@
+**/*.bundle.*
+build
+coverage
+node_modules
+package-lock.json
+prebuilds
+sandbox
+sandbox.js

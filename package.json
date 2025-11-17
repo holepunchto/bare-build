@@ -1,0 +1,70 @@
+{
+  "name": "bare-build",
+  "version": "0.0.0",
+  "description": "Application builder for Bare",
+  "exports": {
+    "./package": "./package.json",
+    ".": "./index.js"
+  },
+  "imports": {
+    "child_process": {
+      "bare": "bare-subprocess",
+      "default": "child_process"
+    },
+    "fs": {
+      "bare": "bare-fs",
+      "default": "fs"
+    },
+    "path": {
+      "bare": "bare-path",
+      "default": "path"
+    },
+    "url": {
+      "bare": "bare-url",
+      "default": "url"
+    }
+  },
+  "bin": {
+    "bare-build": "bin.js"
+  },
+  "files": [
+    "index.js",
+    "bin.js",
+    "CMakeLists.txt",
+    "lib",
+    "prebuilds"
+  ],
+  "scripts": {
+    "test": "prettier . --check && bare test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holepunchto/bare-build.git"
+  },
+  "author": "Holepunch",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/holepunchto/bare-build/issues"
+  },
+  "homepage": "https://github.com/holepunchto/bare-build#readme",
+  "dependencies": {
+    "bare-bundle-id": "^1.0.2",
+    "bare-fs": "^4.5.1",
+    "bare-link": "^1.5.5",
+    "bare-module-traverse": "^1.8.1",
+    "bare-pack": "^1.5.1",
+    "bare-path": "^3.0.0",
+    "bare-subprocess": "^5.1.5",
+    "bare-unpack": "^1.1.3",
+    "bare-url": "^2.3.2",
+    "paparam": "^1.8.0",
+    "require-asset": "^1.1.0"
+  },
+  "devDependencies": {
+    "brittle": "^3.18.0",
+    "cmake-bare": "^1.6.5",
+    "cmake-fetch": "^1.4.0",
+    "prettier": "^3.4.1",
+    "prettier-config-holepunch": "^2.0.0"
+  }
+}
