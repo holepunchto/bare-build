@@ -5,7 +5,9 @@ find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
 
 project(bare_build C)
 
-fetch_package("github:holepunchto/bare@1.24.3")
+set(bare_version "1.24.3")
+
+fetch_package("github:holepunchto/bare@${bare_version}")
 fetch_package("github:holepunchto/libpath")
 
 add_executable(bare_build)
@@ -45,6 +47,26 @@ target_link_libraries(
     rlimit_static
     path_static
 )
+
+if(WIN32)
+  file(READ "lib/runtime.manifest" manifest)
+
+  string(CONFIGURE "${manifest}" manifest)
+
+  file(GENERATE OUTPUT "runtime.manifest" CONTENT "${manifest}" NEWLINE_STYLE WIN32)
+
+  target_sources(
+    ${target}
+    PRIVATE
+      "${CMAKE_CURRENT_BINARY_DIR}/runtime.manifest"
+  )
+
+  target_link_options(
+    bare_build
+    PRIVATE
+      $<$<CONFIG:Release>:/subsystem:windows /entry:mainCRTStartup>
+  )
+endif()
 
 bare_target(target)
 
