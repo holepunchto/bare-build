@@ -13,11 +13,12 @@ const cmd = command(
   flag('--author <name>', 'The name of the application author'),
   flag('--description <text>', 'The description of the application'),
   flag('--icon|-i <path>', 'The application icon'),
+  flag('--identifier <id>', 'The unique application identifier'),
   flag('--target|-t <host>', 'The host to target').multiple(),
   flag('--out|-o <dir>', 'The output directory'),
   async (cmd) => {
     const { entry } = cmd.args
-    const { version, name, author, description, icon, target, out } = cmd.flags
+    const { version, name, author, description, icon, identifier, target, out } = cmd.flags
 
     if (version) return console.log(`v${pkg.version}`)
 
@@ -27,6 +28,7 @@ const cmd = command(
         author,
         description,
         icon,
+        identifier,
         target,
         out
       })
