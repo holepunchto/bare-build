@@ -12,6 +12,8 @@ const windows = require('./lib/platform/windows')
 module.exports = async function build(entry, opts = {}) {
   const { base = path.resolve('.'), target = [], hosts = target } = opts
 
+  const pkg = require(path.join(base, 'package.json'))
+
   let bundle = await pack(
     pathToFileURL(entry),
     {
@@ -63,6 +65,6 @@ module.exports = async function build(entry, opts = {}) {
   }
 
   for (const [platform, hosts] of groups) {
-    await platform(base, bundle, { ...opts, hosts })
+    await platform(base, pkg, bundle, { ...opts, hosts })
   }
 }

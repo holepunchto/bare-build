@@ -1,5 +1,8 @@
 {
-  "name": "app",
+  "name": "My App",
+  "version": "1.2.3",
+  "description": "An amazing app",
+  "author": "John Doe",
   "dependencies": {
     "fx-native": "^1.1.0"
   }
