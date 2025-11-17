@@ -7,6 +7,12 @@
     ".": "./index.js"
   },
   "imports": {
+    "#appimagetool": {
+      "linux": {
+        "arm64": "./prebuilds/linux-arm64/appimagetool.AppImage",
+        "x64": "./prebuilds/linux-x64/appimagetool.AppImage"
+      }
+    },
     "child_process": {
       "bare": "bare-subprocess",
       "default": "child_process"
