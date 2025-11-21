@@ -42,6 +42,7 @@ options = {
   identifier,
   target: [],
   out: '.',
+  package: false,
   sign: false,
 
   // Apple signing options
@@ -74,6 +75,7 @@ Flags include:
 --identifier <id>
 --target|-t <host>
 --out|-o <dir>
+--package
 --sign
 --identity <id>
 --keychain <name>
