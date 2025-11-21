@@ -47,6 +47,8 @@ options = {
 
   // Apple signing options
   identity: 'Apple Development',
+  applicationIdentity: identity,
+  installerIdentity: identity,
   keychain,
   entitlements,
   hardenedRuntime: false,
@@ -68,24 +70,27 @@ options = {
 Flags include:
 
 ```console
---name|-n <name>
---author <name>
---description <text>
---icon|-i <path>
---identifier <id>
---target|-t <host>
---out|-o <dir>
---package
---sign
---identity <id>
---keychain <name>
---entitlements <path>
---hardened-runtime
---subject <id>
---subject-name <name>
---thumbprint <sha1>
---key <hash>
---help|-h
+--version|-v                  Print the current version
+--name|-n <name>              The application name
+--author <name>               The name of the application author
+--description <text>          The description of the application
+--icon|-i <path>              The application icon
+--identifier <id>             The unique application identifier
+--target|-t <host>            The host to target
+--out|-o <dir>                The output directory
+--package                     Package the application for distribution
+--sign                        Sign the application
+--identity <id>               The macOS signing identity
+--application-identity <id>   The macOS application signing identity
+--installer-identity <id>     The macOS installer signing identity
+--keychain <name>             The macOS signing keychain
+--entitlements <path>         The macOS signing entitlements
+--hardened-runtime            Enable the macOS hardened runtime
+--subject <id>                The Windows signing subject
+--subject-name <name>         The Windows signing subject friendly name
+--thumbprint <sha1>           The Windows signing subject thumbprint
+--key <hash>                  The GPG signing key
+--help|-h                     Show help
 ```
 
 ## License
