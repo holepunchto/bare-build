@@ -72,4 +72,4 @@ endif()
 
 bare_target(target)
 
-install(TARGETS bare_build DESTINATION ${target})
+install(TARGETS bare_build RUNTIME DESTINATION ${target})
