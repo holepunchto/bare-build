@@ -7,12 +7,6 @@
     ".": "./index.js"
   },
   "imports": {
-    "#appimagetool": {
-      "linux": {
-        "arm64": "./prebuilds/linux-arm64/appimagetool.AppImage",
-        "x64": "./prebuilds/linux-x64/appimagetool.AppImage"
-      }
-    },
     "child_process": {
       "bare": "bare-subprocess",
       "default": "child_process"
@@ -60,7 +54,8 @@
   "dependencies": {
     "bare-bundle-id": "^1.0.2",
     "bare-fs": "^4.5.1",
-    "bare-link": "^2.0.0",
+    "bare-lief": "^0.0.2",
+    "bare-link": "^2.1.0",
     "bare-module-traverse": "^1.8.1",
     "bare-os": "^3.6.2",
     "bare-pack": "^1.5.1",
@@ -70,6 +65,9 @@
     "bare-url": "^2.3.2",
     "paparam": "^1.8.0",
     "require-asset": "^1.1.0"
+  },
+  "optionalDependencies": {
+    "bare-app-image": "^0.0.0"
   },
   "devDependencies": {
     "brittle": "^3.18.0",

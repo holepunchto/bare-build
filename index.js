@@ -5,11 +5,7 @@ const id = require('bare-bundle-id')
 const pack = require('bare-pack')
 const fs = require('bare-pack/fs')
 
-const apple = require('./lib/platform/apple')
-const linux = require('./lib/platform/linux')
-const windows = require('./lib/platform/windows')
-
-module.exports = async function build(entry, opts = {}) {
+module.exports = async function* build(entry, opts = {}) {
   const { base = '.', target = [], hosts = target } = opts
 
   let pkg
@@ -45,15 +41,15 @@ module.exports = async function build(entry, opts = {}) {
       case 'ios-arm64':
       case 'ios-arm64-simulator':
       case 'ios-x64-simulator':
-        platform = apple
+        platform = require('./lib/platform/apple')
         break
       case 'linux-arm64':
       case 'linux-x64':
-        platform = linux
+        platform = require('./lib/platform/linux')
         break
       case 'win32-arm64':
       case 'win32-x64':
-        platform = windows
+        platform = require('./lib/platform/windows')
         break
       default:
         throw new Error(`Unknown host '${host}'`)
@@ -70,6 +66,6 @@ module.exports = async function build(entry, opts = {}) {
   }
 
   for (const [platform, hosts] of groups) {
-    await platform(base, pkg, bundle, { ...opts, hosts })
+    yield* platform(base, pkg, bundle, { ...opts, hosts })
   }
 }

@@ -56,7 +56,7 @@ const cmd = command(
     if (version) return console.log(`v${pkg.version}`)
 
     try {
-      await build(entry, {
+      for await (const _ of build(entry, {
         name,
         author,
         description,
@@ -76,7 +76,8 @@ const cmd = command(
         subjectName,
         thumbprint,
         key
-      })
+      })) {
+      }
     } catch (err) {
       if (err) console.error(err)
       process.exitCode = 1

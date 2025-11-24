@@ -5,9 +5,7 @@ find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
 
 project(bare_build C)
 
-set(bare_version "1.24.3")
-
-fetch_package("github:holepunchto/bare@${bare_version}")
+fetch_package("github:holepunchto/bare@1.24.3")
 fetch_package("github:holepunchto/libpath")
 
 add_executable(bare_build)
@@ -49,6 +47,10 @@ target_link_libraries(
 )
 
 if(WIN32)
+  file(READ "package.json" pkg)
+
+  string(JSON version GET "${pkg}" version)
+
   file(READ "lib/runtime.manifest" manifest)
 
   string(CONFIGURE "${manifest}" manifest)

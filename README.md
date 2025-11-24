@@ -11,11 +11,13 @@ npm i [-g] bare-build
 ```js
 const build = require('bare-build')
 
-await build('/path/to/app.js', {
-  target: ['darwin-arm64', 'darwinx64'],
+for await (const resource of build('/path/to/app.js', {
+  target: ['darwin-arm64', 'darwin-x64'],
   icon: 'icon.icns',
   identifier: 'com.example.App'
-})
+})) {
+  console.log(resource)
+}
 ```
 
 ```console
@@ -28,7 +30,7 @@ bare-build \
 
 ## API
 
-#### `await build(entry[, options])`
+#### `for await (const resource of build(entry[, options]))`
 
 Options include:
 
