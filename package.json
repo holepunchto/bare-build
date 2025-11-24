@@ -54,8 +54,8 @@
   "dependencies": {
     "bare-bundle-id": "^1.0.2",
     "bare-fs": "^4.5.1",
-    "bare-lief": "^0.0.2",
-    "bare-link": "^2.1.0",
+    "bare-lief": "^0.0.3",
+    "bare-link": "^2.1.2",
     "bare-module-traverse": "^1.8.1",
     "bare-os": "^3.6.2",
     "bare-pack": "^1.5.1",
