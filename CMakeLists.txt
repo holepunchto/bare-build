@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 4.0)
 
 find_package(cmake-bare REQUIRED PATHS node_modules/cmake-bare)
+find_package(cmake-bare-bundle REQUIRED PATHS node_modules/cmake-bare-bundle)
 find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
 
 project(bare_build C)
@@ -8,28 +9,36 @@ project(bare_build C)
 fetch_package("github:holepunchto/bare@1.24.3")
 fetch_package("github:holepunchto/libpath")
 
-add_executable(bare_build)
+add_bare_bundle(
+  bare_runtime_bundle
+  ENTRY lib/runtime.js
+  OUT lib/runtime.bundle.h
+  BUILTINS lib/builtins.json
+)
+
+add_executable(bare_runtime)
 
 target_sources(
-  bare_build
+  bare_runtime
   PRIVATE
     lib/runtime.c
+    lib/runtime.bundle.h
 )
 
 if(APPLE)
-  set(bare_build_rpath "@loader_path/../Frameworks")
+  set(bare_runtime_rpath "@loader_path/../Frameworks")
 elseif(LINUX)
-  set(bare_build_rpath "$ORIGIN/../lib")
+  set(bare_runtime_rpath "$ORIGIN/../lib")
 else()
   set(${target}_rpath "")
 endif()
 
 set_target_properties(
-  bare_build
+  bare_runtime
   PROPERTIES
   OUTPUT_NAME bare
 
-  INSTALL_RPATH "${bare_build_rpath}"
+  INSTALL_RPATH "${bare_runtime_rpath}"
   BUILD_WITH_INSTALL_RPATH ON
 
   ENABLE_EXPORTS ON
@@ -37,7 +46,7 @@ set_target_properties(
 )
 
 target_link_libraries(
-  bare_build
+  bare_runtime
   PUBLIC
     $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
   PRIVATE
@@ -58,18 +67,18 @@ if(WIN32)
   file(GENERATE OUTPUT "runtime.manifest" CONTENT "${manifest}" NEWLINE_STYLE WIN32)
 
   target_sources(
-    bare_build
+    bare_runtime
     PRIVATE
       "${CMAKE_CURRENT_BINARY_DIR}/runtime.manifest"
   )
-
-  target_link_options(
-    bare_build
-    PRIVATE
-      $<$<CONFIG:Release>:/subsystem:windows /entry:mainCRTStartup>
-  )
 endif()
+
+link_bare_module(bare_runtime bare-fs)
+link_bare_module(bare_runtime bare-module)
+link_bare_module(bare_runtime bare-module-lexer)
+link_bare_module(bare_runtime bare-os)
+link_bare_module(bare_runtime bare-url)
 
 bare_target(target)
 
-install(TARGETS bare_build RUNTIME DESTINATION ${target})
+install(TARGETS bare_runtime RUNTIME DESTINATION ${target})
