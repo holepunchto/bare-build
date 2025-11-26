@@ -3,7 +3,7 @@ const { pathToFileURL } = require('url')
 const { resolve } = require('bare-module-traverse')
 const id = require('bare-bundle-id')
 const pack = require('bare-pack')
-const fs = require('bare-pack/fs')
+const { readModule, listPrefix } = require('bare-pack/fs')
 
 module.exports = async function* build(entry, opts = {}) {
   const { base = '.', target = [], hosts = target } = opts
@@ -22,8 +22,8 @@ module.exports = async function* build(entry, opts = {}) {
       linked: true,
       resolve: resolve.bare
     },
-    fs.readModule,
-    fs.listPrefix
+    readModule,
+    listPrefix
   )
 
   bundle = bundle.unmount(pathToFileURL(base))
