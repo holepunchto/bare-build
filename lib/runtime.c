@@ -9,6 +9,8 @@
 
 #if defined(__APPLE__)
 #include "runtime/apple.h"
+#elif defined(__linux__)
+#include "runtime/linux.h"
 #endif
 
 #include "runtime.bundle.h"
