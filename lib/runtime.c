@@ -11,6 +11,8 @@
 #include "runtime/apple.h"
 #elif defined(__linux__)
 #include "runtime/linux.h"
+#elif defined(_WIN32)
+#include "runtime/windows.h"
 #endif
 
 #include "runtime.bundle.h"

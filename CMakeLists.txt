@@ -23,6 +23,9 @@ target_sources(
   PRIVATE
     lib/runtime.c
     lib/runtime.bundle.h
+    lib/runtime/apple.h
+    lib/runtime/linux.h
+    lib/runtime/windows.h
 )
 
 if(APPLE)
