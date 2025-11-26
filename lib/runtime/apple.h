@@ -6,6 +6,9 @@
 
 extern const struct mach_header_64 _mh_execute_header;
 
+static inline void
+bare__prepare_main(void) {}
+
 static inline int
 bare__get_embedded_bundle(uv_buf_t *result) {
   size_t len;

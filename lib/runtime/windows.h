@@ -2,6 +2,15 @@
 #include <uv.h>
 #include <windows.h>
 
+static inline void
+bare__prepare_main(void) {
+  if (GetConsoleWindow() == NULL) {
+    freopen("NUL", "r", stdin);
+    freopen("NUL", "w", stdout);
+    freopen("NUL", "w", stderr);
+  }
+}
+
 static inline int
 bare__get_embedded_bundle(uv_buf_t *result) {
   HMODULE module = GetModuleHandle(NULL);
