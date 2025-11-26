@@ -66,6 +66,14 @@ main(int argc, char *argv[]) {
   err = log_open("bare", 0);
   assert(err == 0);
 
+#ifdef _WIN32
+  if (GetConsoleWindow() == NULL) {
+    freopen("NUL", "r", stdin);
+    freopen("NUL", "w", stdout);
+    freopen("NUL", "w", stderr);
+  }
+#endif
+
   err = rlimit_set(rlimit_open_files, rlimit_infer);
   assert(err == 0);
 
