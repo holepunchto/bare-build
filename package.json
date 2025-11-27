@@ -54,7 +54,7 @@
   "dependencies": {
     "bare-bundle-id": "^1.0.2",
     "bare-fs": "^4.5.1",
-    "bare-lief": "^0.0.3",
+    "bare-lief": "^0.1.1",
     "bare-link": "^2.1.2",
     "bare-module-traverse": "^1.8.1",
     "bare-os": "^3.6.2",
@@ -70,8 +70,11 @@
     "bare-app-image": "^0.0.0"
   },
   "devDependencies": {
+    "bare-bundle": "^1.10.0",
+    "bare-module": "^6.1.2",
     "brittle": "^3.18.0",
     "cmake-bare": "^1.6.5",
+    "cmake-bare-bundle": "^2.1.4",
     "cmake-fetch": "^1.4.0",
     "prettier": "^3.4.1",
     "prettier-config-holepunch": "^2.0.0"

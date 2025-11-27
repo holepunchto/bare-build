@@ -6,7 +6,7 @@ const pack = require('bare-pack')
 const { readModule, listPrefix } = require('bare-pack/fs')
 
 module.exports = async function* build(entry, opts = {}) {
-  const { base = '.', target = [], hosts = target } = opts
+  const { base = '.', target = [], hosts = target, standalone = false } = opts
 
   let pkg
   try {
@@ -19,7 +19,7 @@ module.exports = async function* build(entry, opts = {}) {
     pathToFileURL(entry),
     {
       hosts,
-      linked: true,
+      linked: standalone === false,
       resolve: resolve.bare
     },
     readModule,
