@@ -12,7 +12,18 @@ module.exports = async function* build(entry, opts = {}) {
   try {
     pkg = require(path.resolve(base, 'package.json'))
   } catch {
-    pkg = {}
+    pkg = null
+  }
+
+  if (pkg) {
+    opts = {
+      name: pkg.name || 'App',
+      version: pkg.version || '1.0.0',
+      description: pkg.description,
+      author: pkg.author,
+
+      ...opts
+    }
   }
 
   let bundle = await pack(
@@ -66,6 +77,6 @@ module.exports = async function* build(entry, opts = {}) {
   }
 
   for (const [platform, hosts] of groups) {
-    yield* platform(base, pkg, bundle, { ...opts, hosts })
+    yield* platform(base, bundle, { ...opts, hosts })
   }
 }
