@@ -28,7 +28,9 @@ target_sources(
     lib/runtime/windows.h
 )
 
-if(APPLE)
+if(IOS)
+  set(bare_runtime_rpath "@loader_path/Frameworks")
+elseif(APPLE)
   set(bare_runtime_rpath "@loader_path/../Frameworks")
 elseif(LINUX)
   set(bare_runtime_rpath "$ORIGIN/../lib")
