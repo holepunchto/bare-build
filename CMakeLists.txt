@@ -41,11 +41,11 @@ endif()
 set_target_properties(
   bare_runtime
   PROPERTIES
+  C_STANDARD 99
+  POSITION_INDEPENDENT_CODE ON
   OUTPUT_NAME bare
-
   INSTALL_RPATH "${bare_runtime_rpath}"
   BUILD_WITH_INSTALL_RPATH ON
-
   ENABLE_EXPORTS ON
   WINDOWS_EXPORT_ALL_SYMBOLS ON
 )
