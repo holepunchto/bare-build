@@ -44,6 +44,7 @@ options = {
   identifier,
   target: [],
   out: '.',
+  runtime,
   standalone: false,
   package: false,
   sign: false,
@@ -81,6 +82,7 @@ Flags include:
 --identifier <id>             The unique application identifier
 --target|-t <host>            The host to target
 --out|-o <dir>                The output directory
+--runtime <specifier>         The runtime to use
 --standalone                  Build a standalone executable
 --package                     Package the application for distribution
 --sign                        Sign the application

@@ -1,9 +1,11 @@
 const path = require('path')
-const { pathToFileURL } = require('url')
-const { resolve } = require('bare-module-traverse')
+const { pathToFileURL, fileURLToPath } = require('url')
+const traverse = require('bare-module-traverse')
+const resolve = require('bare-module-resolve')
 const id = require('bare-bundle-id')
 const pack = require('bare-pack')
 const { readModule, listPrefix } = require('bare-pack/fs')
+const fs = require('./lib/fs')
 
 module.exports = async function* build(entry, opts = {}) {
   const { base = '.', target = [], hosts = target, standalone = false } = opts
@@ -16,14 +18,18 @@ module.exports = async function* build(entry, opts = {}) {
   }
 
   if (pkg) {
-    opts = {
-      name: pkg.name || 'App',
-      version: pkg.version || '1.0.0',
-      description: pkg.description,
-      author: pkg.author,
+    const {
+      name = opts.name || pkg.name || 'App',
+      version = opts.version || pkg.version || '1.0.0',
+      description = opts.description || pkg.description,
+      author = opts.author || pkg.author
+    } = pkg
 
-      ...opts
-    }
+    opts = { ...opts, name, version, description, author }
+  }
+
+  if (typeof opts.runtime === 'string') {
+    opts = { ...opts, runtime: await requireRelativeTo(opts.runtime, pathToFileURL(base + '/')) }
   }
 
   let bundle = await pack(
@@ -31,7 +37,7 @@ module.exports = async function* build(entry, opts = {}) {
     {
       hosts,
       linked: standalone === false,
-      resolve: resolve.bare
+      resolve: traverse.resolve.bare
     },
     readModule,
     listPrefix
@@ -78,5 +84,23 @@ module.exports = async function* build(entry, opts = {}) {
 
   for (const [platform, hosts] of groups) {
     yield* platform(base, bundle, { ...opts, hosts })
+  }
+}
+
+async function requireRelativeTo(specifier, parentURL) {
+  for await (const candidate of resolve(specifier, parentURL, readPackage)) {
+    if (await fs.isFile(candidate)) {
+      return require(fileURLToPath(candidate))
+    }
+  }
+
+  throw new Error(`Cannot find module '${specifier}' imported from '${parentURL.href}'`)
+}
+
+async function readPackage(url) {
+  try {
+    return JSON.parse(await fs.readFile(url))
+  } catch {
+    return null
   }
 }

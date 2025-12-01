@@ -16,6 +16,7 @@ const cmd = command(
   flag('--identifier <id>', 'The unique application identifier'),
   flag('--target|-t <host>', 'The host to target').multiple(),
   flag('--out|-o <dir>', 'The output directory'),
+  flag('--runtime <specifier>', 'The runtime to use'),
   flag('--standalone', 'Build a standalone executable'),
   flag('--package', 'Package the application for distribution'),
   flag('--sign', 'Sign the application'),
@@ -31,7 +32,7 @@ const cmd = command(
   flag('--key <hash>', 'The GPG signing key'),
   async (cmd) => {
     const { entry } = cmd.args
-    const {
+    let {
       version,
       name,
       author,
@@ -40,6 +41,7 @@ const cmd = command(
       identifier,
       target,
       out,
+      runtime,
       standalone,
       package,
       sign,
@@ -66,6 +68,7 @@ const cmd = command(
         identifier,
         target,
         out,
+        runtime,
         standalone,
         package,
         sign,
