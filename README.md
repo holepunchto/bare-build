@@ -30,7 +30,7 @@ bare-build \
 
 ## API
 
-#### `for await (const resource of build(entry[, options]))`
+#### `for await (const resource of build(entry[, preflight][, options]))`
 
 Options include:
 

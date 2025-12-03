@@ -7,7 +7,12 @@ const pack = require('bare-pack')
 const { readModule, listPrefix } = require('bare-pack/fs')
 const fs = require('./lib/fs')
 
-module.exports = async function* build(entry, opts = {}) {
+module.exports = async function* build(entry, preflight = null, opts = {}) {
+  if (typeof preflight === 'object' && preflight !== null) {
+    opts = preflight
+    preflight = null
+  }
+
   const { base = '.', target = [], hosts = target, standalone = false } = opts
 
   let pkg
@@ -32,7 +37,7 @@ module.exports = async function* build(entry, opts = {}) {
     opts = { ...opts, runtime: await requireRelativeTo(opts.runtime, pathToFileURL(base + '/')) }
   }
 
-  let bundle = await pack(
+  entry = await pack(
     pathToFileURL(entry),
     {
       hosts,
@@ -43,9 +48,26 @@ module.exports = async function* build(entry, opts = {}) {
     listPrefix
   )
 
-  bundle = bundle.unmount(pathToFileURL(base))
+  entry = entry.unmount(pathToFileURL(base))
 
-  bundle.id = id(bundle).toString('hex')
+  entry.id = id(entry).toString('hex')
+
+  if (preflight) {
+    preflight = await pack(
+      pathToFileURL(preflight),
+      {
+        hosts,
+        linked: true,
+        resolve: traverse.resolve.bare
+      },
+      readModule,
+      listPrefix
+    )
+
+    preflight = preflight.unmount(pathToFileURL(base))
+
+    preflight.id = id(preflight).toString('hex')
+  }
 
   const groups = new Map()
 
@@ -83,7 +105,7 @@ module.exports = async function* build(entry, opts = {}) {
   }
 
   for (const [platform, hosts] of groups) {
-    yield* platform(base, bundle, { ...opts, hosts })
+    yield* platform(base, entry, preflight, { ...opts, hosts })
   }
 }
 

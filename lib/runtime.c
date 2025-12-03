@@ -7,6 +7,10 @@
 #include <signal.h>
 #include <uv.h>
 
+#if !defined(_WIN32)
+#include <unistd.h>
+#endif
+
 #if defined(__APPLE__)
 #include "runtime/apple.h"
 #elif defined(__linux__)
@@ -86,16 +90,16 @@ main(int argc, char *argv[]) {
 
   uv_loop_t *loop = uv_default_loop();
 
-  js_env_t *env;
-
   bare_t *bare;
-  err = bare_setup(loop, bare__platform, &env, argc, (const char **) argv, NULL, &bare);
-  assert(err == 0);
 
   uv_buf_t bundle;
   err = bare__get_embedded_bundle(&bundle);
 
   if (err == 0) {
+    js_env_t *env;
+    err = bare_setup(loop, bare__platform, &env, argc, (const char **) argv, NULL, &bare);
+    assert(err == 0);
+
     js_handle_scope_t *scope;
     err = js_open_handle_scope(env, &scope);
     assert(err == 0);
@@ -137,7 +141,44 @@ main(int argc, char *argv[]) {
     err = path_dirname(bin, &dir, path_behavior_system);
     assert(err == 0);
 
-    char bundle[4096];
+    char preflight[4096];
+    len = 4096;
+
+    err = path_join(
+#if defined(BARE_PLATFORM_DARWIN) || defined(BARE_PLATFORM_WIN32)
+      (const char *[]) {bin, "..", "..", "Resources", "preflight.bundle", NULL},
+#elif defined(BARE_PLATFORM_IOS)
+      (const char *[]) {bin, "..", "preflight.bundle", NULL},
+#elif defined(BARE_PLATFORM_LINUX)
+      (const char *[]) {bin, "..", "..", "share", &bin[dir], "preflight.bundle", NULL},
+#endif
+      preflight,
+      &len,
+      path_behavior_system
+    );
+    assert(err == 0);
+
+    uv_fs_t fs;
+    err = uv_fs_access(loop, &fs, preflight, R_OK, NULL);
+
+    if (err == 0) {
+      err = bare_setup(loop, bare__platform, NULL, argc, (const char **) argv, NULL, &bare);
+      assert(err == 0);
+
+      err = bare_load(bare, preflight, NULL, NULL);
+      (void) err;
+
+      err = bare_run(bare, UV_RUN_DEFAULT);
+      assert(err == 0);
+
+      int exit_code;
+      err = bare_teardown(bare, UV_RUN_DEFAULT, &exit_code);
+      assert(err == 0);
+
+      if (exit_code != 0) _exit(exit_code);
+    }
+
+    char entry[4096];
     len = 4096;
 
     err = path_join(
@@ -148,13 +189,16 @@ main(int argc, char *argv[]) {
 #elif defined(BARE_PLATFORM_LINUX)
       (const char *[]) {bin, "..", "..", "share", &bin[dir], "app.bundle", NULL},
 #endif
-      bundle,
+      entry,
       &len,
       path_behavior_system
     );
     assert(err == 0);
 
-    err = bare_load(bare, bundle, NULL, NULL);
+    err = bare_setup(loop, bare__platform, NULL, argc, (const char **) argv, NULL, &bare);
+    assert(err == 0);
+
+    err = bare_load(bare, entry, NULL, NULL);
     (void) err;
   }
 
