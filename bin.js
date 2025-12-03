@@ -8,6 +8,7 @@ const cmd = command(
   pkg.name,
   summary(pkg.description),
   arg('<entry>', 'The entry point of the app'),
+  arg('[preflight]', 'The optional preflight entry point of the app'),
   flag('--version|-v', 'Print the current version'),
   flag('--name|-n <name>', 'The application name'),
   flag('--author <name>', 'The name of the application author'),
@@ -31,7 +32,7 @@ const cmd = command(
   flag('--thumbprint <sha1>', 'The Windows signing subject thumbprint'),
   flag('--key <hash>', 'The GPG signing key'),
   async (cmd) => {
-    const { entry } = cmd.args
+    const { entry, preflight } = cmd.args
     let {
       version,
       name,
@@ -60,7 +61,7 @@ const cmd = command(
     if (version) return console.log(`v${pkg.version}`)
 
     try {
-      for await (const _ of build(entry, {
+      for await (const _ of build(entry, preflight, {
         name,
         author,
         description,
