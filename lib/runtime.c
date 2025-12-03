@@ -165,11 +165,11 @@ main(int argc, char *argv[]) {
       err = bare_setup(loop, bare__platform, NULL, argc, (const char **) argv, NULL, &bare);
       assert(err == 0);
 
-      err = bare_run(bare, UV_RUN_DEFAULT);
-      assert(err == 0);
-
       err = bare_load(bare, preflight, NULL, NULL);
       (void) err;
+
+      err = bare_run(bare, UV_RUN_DEFAULT);
+      assert(err == 0);
 
       int exit_code;
       err = bare_teardown(bare, UV_RUN_DEFAULT, &exit_code);
