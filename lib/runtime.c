@@ -5,8 +5,11 @@
 #include <path.h>
 #include <rlimit.h>
 #include <signal.h>
-#include <unistd.h>
 #include <uv.h>
+
+#if !defined(_WIN32)
+#include <unistd.h>
+#endif
 
 #if defined(__APPLE__)
 #include "runtime/apple.h"
