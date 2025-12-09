@@ -31,6 +31,9 @@ const cmd = command(
   flag('--subject-name <name>', 'The Windows signing subject friendly name'),
   flag('--thumbprint <sha1>', 'The Windows signing subject thumbprint'),
   flag('--key <hash>', 'The GPG signing key'),
+  flag('--keystore <path>', 'The Java-based keystore file'),
+  flag('--keystore-key <name>', 'The name of the certificate to use from the keystore'),
+  flag('--keystore-password <password>', 'The password to the keystore file'),
   async (cmd) => {
     const { entry, preflight } = cmd.args
     let {
@@ -55,7 +58,10 @@ const cmd = command(
       subject,
       subjectName,
       thumbprint,
-      key
+      key,
+      keystore,
+      keystoreKey,
+      keystorePassword
     } = cmd.flags
 
     if (version) return console.log(`v${pkg.version}`)
@@ -82,7 +88,10 @@ const cmd = command(
         subject,
         subjectName,
         thumbprint,
-        key
+        key,
+        keystore,
+        keystoreKey,
+        keystorePassword
       })) {
       }
     } catch (err) {
