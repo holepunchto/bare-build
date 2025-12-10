@@ -63,7 +63,12 @@ options = {
   thumbprint,
 
   // Linux signing options
-  key
+  key,
+
+  // Android signing options
+  keystore,
+  keystoreKey,
+  keystorePassword
 }
 ```
 
@@ -74,29 +79,32 @@ options = {
 Flags include:
 
 ```console
---version|-v                  Print the current version
---name|-n <name>              The application name
---author <name>               The name of the application author
---description <text>          The description of the application
---icon|-i <path>              The application icon
---identifier <id>             The unique application identifier
---target|-t <host>            The host to target
---out|-o <dir>                The output directory
---runtime <specifier>         The runtime to use
---standalone                  Build a standalone executable
---package                     Package the application for distribution
---sign                        Sign the application
---identity <id>               The macOS signing identity
---application-identity <id>   The macOS application signing identity
---installer-identity <id>     The macOS installer signing identity
---keychain <name>             The macOS signing keychain
---entitlements <path>         The macOS signing entitlements
---hardened-runtime            Enable the macOS hardened runtime
---subject <id>                The Windows signing subject
---subject-name <name>         The Windows signing subject friendly name
---thumbprint <sha1>           The Windows signing subject thumbprint
---key <hash>                  The GPG signing key
---help|-h                     Show help
+--version|-v                     Print the current version
+--name|-n <name>                 The application name
+--author <name>                  The name of the application author
+--description <text>             The description of the application
+--icon|-i <path>                 The application icon
+--identifier <id>                The unique application identifier
+--target|-t <host>               The host to target
+--out|-o <dir>                   The output directory
+--runtime <specifier>            The runtime to use
+--standalone                     Build a standalone executable
+--package                        Package the application for distribution
+--sign                           Sign the application
+--identity <id>                  The macOS signing identity
+--application-identity <id>      The macOS application signing identity
+--installer-identity <id>        The macOS installer signing identity
+--keychain <name>                The macOS signing keychain
+--entitlements <path>            The macOS signing entitlements
+--hardened-runtime               Enable the macOS hardened runtime
+--subject <id>                   The Windows signing subject
+--subject-name <name>            The Windows signing subject friendly name
+--thumbprint <sha1>              The Windows signing subject thumbprint
+--key <hash>                     The GPG signing key
+--keystore <path>                The Java-based keystore file
+--keystore-key <name>            The name of the certificate to use from the keystore
+--keystore-password <password>   The password to the keystore file
+--help|-h                        Show help
 ```
 
 ## License

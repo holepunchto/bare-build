@@ -82,6 +82,12 @@ module.exports = async function* build(entry, preflight = null, opts = {}) {
       case 'ios-x64-simulator':
         platform = require('./lib/platform/apple')
         break
+      case 'android-arm64':
+      case 'android-arm':
+      case 'android-ia32':
+      case 'android-x64':
+        platform = require('./lib/platform/android')
+        break
       case 'linux-arm64':
       case 'linux-x64':
         platform = require('./lib/platform/linux')
