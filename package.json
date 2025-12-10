@@ -68,7 +68,7 @@
     "require-asset": "^1.1.0"
   },
   "optionalDependencies": {
-    "bare-apk": "^0.1.0",
+    "bare-apk": "^0.1.1",
     "bare-app-image": "^0.1.0"
   },
   "devDependencies": {
