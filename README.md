@@ -12,6 +12,7 @@ npm i [-g] bare-build
 const build = require('bare-build')
 
 for await (const resource of build('/path/to/app.js', {
+  base: '/path/to/',
   target: ['darwin-arm64', 'darwin-x64'],
   icon: 'icon.icns',
   identifier: 'com.example.App'
@@ -42,6 +43,7 @@ options = {
   description: pkg.description,
   icon,
   identifier,
+  base: '.',
   target: [],
   out: '.',
   runtime,
@@ -85,6 +87,7 @@ Flags include:
 --description <text>             The description of the application
 --icon|-i <path>                 The application icon
 --identifier <id>                The unique application identifier
+--base <path>                    The base path of the application (default: .)
 --target|-t <host>               The host to target
 --out|-o <dir>                   The output directory
 --runtime <specifier>            The runtime to use
