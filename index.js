@@ -19,19 +19,13 @@ module.exports = async function* build(entry, preflight = null, opts = {}) {
   try {
     pkg = require(path.resolve(base, 'package.json'))
   } catch {
-    pkg = null
+    pkg = {}
   }
 
-  if (pkg) {
-    const {
-      name = opts.name || pkg.name || 'App',
-      version = opts.version || pkg.version || '1.0.0',
-      description = opts.description || pkg.description,
-      author = opts.author || pkg.author
-    } = pkg
-
-    opts = { ...opts, name, version, description, author }
-  }
+  opts.name ||= pkg.name || 'App'
+  opts.version ||= pkg.version || '1.0.0'
+  opts.description ||= pkg.description
+  opts.author ||= pkg.author
 
   if (typeof opts.runtime === 'string') {
     opts = { ...opts, runtime: await requireRelativeTo(opts.runtime, pathToFileURL(base + '/')) }
