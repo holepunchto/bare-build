@@ -1,6 +1,6 @@
 # bare-build
 
-Application builder for Bare.
+Application builder for Bare that allows developers to package their JavaScript code as either native application bundles or standalone executables for both desktop and mobile.
 
 ```
 npm i [-g] bare-build
@@ -28,6 +28,16 @@ bare-build \
   --identifier com.example.App \
   app.js
 ```
+
+## Formats
+
+| Platform | Unpackaged                 | Packaged (`--package`) | Standalone (`--standalone`)                                   |
+| :------- | :------------------------- | :--------------------- | :------------------------------------------------------------ |
+| Linux    | `.AppDir`, Snap compatible | `.AppImage`            | ELF executable with self-extracting `.so` libraries           |
+| Android  | `.apk`                     | `.aab`                 | Unsupported                                                   |
+| macOS    | `.app`                     | `.pkg`                 | Mach-O executable with self-extracting `.framework` libraries |
+| iOS      | `.app`                     | `.pkg`                 | Mach-O executable with self-extracting `.framework` libraries |
+| Windows  | Plain directory            | `.msix`                | PE executable with self-extracting `.dll` libraries           |
 
 ## API
 
