@@ -137,9 +137,11 @@ main(int argc, char *argv[]) {
     err = uv_exepath(bin, &len);
     assert(err == 0);
 
+#if defined(BARE_PLATFORM_LINUX)
     size_t dir;
     err = path_dirname(bin, &dir, path_behavior_system);
     assert(err == 0);
+#endif
 
     char preflight[4096];
     len = 4096;
@@ -147,10 +149,11 @@ main(int argc, char *argv[]) {
     err = path_join(
 #if defined(BARE_PLATFORM_DARWIN) || defined(BARE_PLATFORM_WIN32)
       (const char *[]) {bin, "..", "..", "Resources", "preflight.bundle", NULL},
-#elif defined(BARE_PLATFORM_IOS)
+#elif defined(BARE_PLATFORM_IOS) || defined(BARE_PLATFORM_ANDROID)
       (const char *[]) {bin, "..", "preflight.bundle", NULL},
 #elif defined(BARE_PLATFORM_LINUX)
       (const char *[]) {bin, "..", "..", "share", &bin[dir], "preflight.bundle", NULL},
+      (const char *[]) {bin, "..", "preflight.bundle", NULL},
 #endif
       preflight,
       &len,
@@ -184,10 +187,11 @@ main(int argc, char *argv[]) {
     err = path_join(
 #if defined(BARE_PLATFORM_DARWIN) || defined(BARE_PLATFORM_WIN32)
       (const char *[]) {bin, "..", "..", "Resources", "app.bundle", NULL},
-#elif defined(BARE_PLATFORM_IOS)
+#elif defined(BARE_PLATFORM_IOS) || defined(BARE_PLATFORM_ANDROID)
       (const char *[]) {bin, "..", "app.bundle", NULL},
 #elif defined(BARE_PLATFORM_LINUX)
       (const char *[]) {bin, "..", "..", "share", &bin[dir], "app.bundle", NULL},
+#elif defined(BARE_PLATFORM_ANDROID)
 #endif
       entry,
       &len,
