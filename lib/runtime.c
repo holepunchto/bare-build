@@ -153,7 +153,6 @@ main(int argc, char *argv[]) {
       (const char *[]) {bin, "..", "preflight.bundle", NULL},
 #elif defined(BARE_PLATFORM_LINUX)
       (const char *[]) {bin, "..", "..", "share", &bin[dir], "preflight.bundle", NULL},
-      (const char *[]) {bin, "..", "preflight.bundle", NULL},
 #endif
       preflight,
       &len,
@@ -191,7 +190,6 @@ main(int argc, char *argv[]) {
       (const char *[]) {bin, "..", "app.bundle", NULL},
 #elif defined(BARE_PLATFORM_LINUX)
       (const char *[]) {bin, "..", "..", "share", &bin[dir], "app.bundle", NULL},
-#elif defined(BARE_PLATFORM_ANDROID)
 #endif
       entry,
       &len,
