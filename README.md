@@ -31,13 +31,13 @@ bare-build \
 
 ## Formats
 
-| Platform | Unpackaged                 | Packaged (`--package`) | Standalone (`--standalone`)                                   |
-| :------- | :------------------------- | :--------------------- | :------------------------------------------------------------ |
-| Linux    | `.AppDir`, Snap compatible | `.AppImage`            | ELF executable with self-extracting `.so` libraries           |
-| Android  | `.apk`                     | `.aab`                 | Unsupported                                                   |
-| macOS    | `.app`                     | `.pkg`                 | Mach-O executable with self-extracting `.framework` libraries |
-| iOS      | `.app`                     | `.pkg`                 | Mach-O executable with self-extracting `.framework` libraries |
-| Windows  | Plain directory            | `.msix`                | PE executable with self-extracting `.dll` libraries           |
+| Platform | Unpackaged                 | `--package` | `--standalone`                                                |
+| :------- | :------------------------- | :---------- | :------------------------------------------------------------ |
+| Linux    | `.AppDir`, Snap compatible | `.AppImage` | ELF executable with self-extracting `.so` libraries           |
+| Android  | `.apk`                     | `.aab`      | Unsupported                                                   |
+| macOS    | `.app`                     | `.pkg`      | Mach-O executable with self-extracting `.framework` libraries |
+| iOS      | `.app`                     | `.pkg`      | Mach-O executable with self-extracting `.framework` libraries |
+| Windows  | Plain directory            | `.msix`     | PE executable with self-extracting `.dll` libraries           |
 
 ## API
 
