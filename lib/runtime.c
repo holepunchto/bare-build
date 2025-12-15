@@ -1,7 +1,6 @@
 #include <assert.h>
 #include <bare.h>
 #include <js.h>
-#include <log.h>
 #include <path.h>
 #include <rlimit.h>
 #include <signal.h>
@@ -66,9 +65,6 @@ main(int argc, char *argv[]) {
 #ifdef SIGPIPE
   signal(SIGPIPE, SIG_IGN);
 #endif
-
-  err = log_open("bare", 0);
-  assert(err == 0);
 
   err = rlimit_set(rlimit_open_files, rlimit_infer);
   assert(err == 0);
