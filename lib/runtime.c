@@ -215,8 +215,5 @@ main(int argc, char *argv[]) {
 
   uv_thread_join(&thread);
 
-  err = log_close();
-  assert(err == 0);
-
   return exit_code;
 }
