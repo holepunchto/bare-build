@@ -15,6 +15,8 @@ const cmd = command(
   flag('--description <text>', 'The description of the application'),
   flag('--icon|-i <path>', 'The application icon'),
   flag('--identifier <id>', 'The unique application identifier'),
+  flag('--manifest <path>', 'The platform specific application manifest'),
+  flag('--resources <path>', 'The platform specific application resources'),
   flag('--base <path>', 'The base path of the application').default('.'),
   flag('--target|-t <host>', 'The host to target').multiple(),
   flag('--out|-o <dir>', 'The output directory'),

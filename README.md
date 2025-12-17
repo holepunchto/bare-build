@@ -53,6 +53,8 @@ options = {
   description: pkg.description,
   icon,
   identifier,
+  manifest,
+  resources,
   base: '.',
   target: [],
   out: '.',
@@ -97,6 +99,8 @@ Flags include:
 --description <text>             The description of the application
 --icon|-i <path>                 The application icon
 --identifier <id>                The unique application identifier
+--manifest <path>                The platform specific application manifest
+--resources <path>               The platform specific application resources
 --base <path>                    The base path of the application (default: .)
 --target|-t <host>               The host to target
 --out|-o <dir>                   The output directory
