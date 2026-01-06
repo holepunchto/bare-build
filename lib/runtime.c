@@ -71,6 +71,8 @@ main(int argc, char *argv[]) {
 
   bare__prepare_main();
 
+  uv_disable_stdio_inheritance();
+
   argv = uv_setup_args(argc, argv);
 
   err = uv_barrier_init(&bare__platform_ready, 2);
