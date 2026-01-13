@@ -13,7 +13,7 @@ const build = require('bare-build')
 
 for await (const resource of build('/path/to/app.js', {
   base: '/path/to/',
-  target: ['darwin-arm64', 'darwin-x64'],
+  hosts: ['darwin-arm64', 'darwin-x64'],
   icon: 'icon.icns',
   identifier: 'com.example.App'
 })) {
@@ -23,7 +23,7 @@ for await (const resource of build('/path/to/app.js', {
 
 ```console
 bare-build \
-  --target darwin-arm64 --target darwin-x64 \
+  --host darwin-arm64 --host darwin-x64 \
   --icon icon.icns \
   --identifier com.example.App \
   app.js
@@ -56,7 +56,7 @@ options = {
   manifest,
   resources,
   base: '.',
-  target: [],
+  hosts: [],
   out: '.',
   runtime,
   standalone: false,
@@ -102,7 +102,7 @@ Flags include:
 --manifest <path>                The platform specific application manifest
 --resources <path>               The platform specific application resources
 --base <path>                    The base path of the application (default: .)
---target|-t <host>               The host to target
+--host <host>                    The host to target
 --out|-o <dir>                   The output directory
 --runtime <specifier>            The runtime to use
 --standalone                     Build a standalone executable

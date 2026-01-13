@@ -13,7 +13,7 @@ module.exports = async function* build(entry, preflight = null, opts = {}) {
     preflight = null
   }
 
-  const { base = '.', target = [], hosts = target, standalone = false } = opts
+  const { base = '.', hosts = [], standalone = false } = opts
 
   let pkg
   try {
