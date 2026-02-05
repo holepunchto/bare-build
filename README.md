@@ -49,7 +49,7 @@ bare-build \
 For that purpose, an alternative runtime can be specified via the `runtime` option or the `--runtime` flag. As with the portable runtimes, we maintain native runtimes for all supported systems.
 
 | Platform | Runtime                                                     | API                               | CLI                              |
-| :------- | :---------------------------------------------------------- | :-------------------------------- | -------------------------------- |
+| :------- | :---------------------------------------------------------- | :-------------------------------- | :------------------------------- |
 | Linux    | [bare-gtk](https://github.com/holepunchto/bare-gtk)         | `runtime: 'bare-gtk/runtime'`     | `--runtime bare-gtk/runtime`     |
 | Android  | [bare-ndk](https://github.com/holepunchto/bare-ndk)         | `runtime: 'bare-ndk/runtime'`     | `--runtime bare-ndk/runtime`     |
 | macOS    | [bare-app-kit](https://github.com/holepunchto/bare-app-kit) | `runtime: 'bare-app-kit/runtime'` | `--runtime bare-app-kit/runtime` |
