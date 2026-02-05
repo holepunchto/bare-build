@@ -48,13 +48,13 @@ bare-build \
 
 For that purpose, an alternative runtime can be specified via the `runtime` option or the `--runtime` flag. As with the portable runtimes, we maintain native runtimes for all supported systems.
 
-| Platform | Runtime                                                     | Usage                             |
-| :------- | :---------------------------------------------------------- | :-------------------------------- |
-| Linux    | [bare-gtk](https://github.com/holepunchto/bare-gtk)         | `runtime: 'bare-gtk/runtime'`     |
-| Android  | [bare-ndk](https://github.com/holepunchto/bare-ndk)         | `runtime: 'bare-ndk/runtime'`     |
-| macOS    | [bare-app-kit](https://github.com/holepunchto/bare-app-kit) | `runtime: 'bare-app-kit/runtime'` |
-| iOS      | [bare-ui-kit](https://github.com/holepunchto/bare-ui-kit)   | `runtime: 'bare-ui-kit/runtime'`  |
-| Windows  | [bare-win-ui](https://github.com/holepunchto/bare-win-ui)   | `runtime: 'bare-win-ui/runtime'`  |
+| Platform | Runtime                                                     | API                               | CLI                              |
+| :------- | :---------------------------------------------------------- | :-------------------------------- | -------------------------------- |
+| Linux    | [bare-gtk](https://github.com/holepunchto/bare-gtk)         | `runtime: 'bare-gtk/runtime'`     | `--runtime bare-gtk/runtime`     |
+| Android  | [bare-ndk](https://github.com/holepunchto/bare-ndk)         | `runtime: 'bare-ndk/runtime'`     | `--runtime bare-ndk/runtime`     |
+| macOS    | [bare-app-kit](https://github.com/holepunchto/bare-app-kit) | `runtime: 'bare-app-kit/runtime'` | `--runtime bare-app-kit/runtime` |
+| iOS      | [bare-ui-kit](https://github.com/holepunchto/bare-ui-kit)   | `runtime: 'bare-ui-kit/runtime'`  | `--runtime bare-ui-kit/runtime`  |
+| Windows  | [bare-win-ui](https://github.com/holepunchto/bare-win-ui)   | `runtime: 'bare-win-ui/runtime'`  | `--runtime bare-win-ui/runtime`  |
 
 ## API
 
