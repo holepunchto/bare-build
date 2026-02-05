@@ -41,7 +41,7 @@ bare-build \
 
 ## Runtimes
 
-`bare-build` ships with portable runtimes for all supported systems. Similarly to the `bare` CLI, the portable runtimes are designed to run only the I/O event loop of Bare and they're therefore mostly suited for standalone CLI applications. That's why we refer to them as portable; the same code will run the same way across all systems. For developing native GUI applications, however, the portable runtimes fall short as such applications require tight integration with the native event loop of the corresponding system, such as [`CFRunLoop`][cfrunloop] in Core Foundation or [`Looper`][looper] in Android.
+`bare-build` ships with portable runtimes for all supported systems. Similarly to the `bare` CLI, the portable runtimes are designed to run only the I/O event loop of Bare and they're therefore mostly suited for standalone CLI applications. That's why we refer to them as portable; the same code will run the same way across all systems. For developing native GUI applications, however, the portable runtimes fall short as such applications require tight integration with the native event loop of the corresponding system, such as [`CFRunLoop`][cfrunloop] in Core Foundation or [`Looper`][looper] in Android. These applications must instead use a native runtime designed specifically for the system on which they're run.
 
 [cfrunloop]: https://developer.apple.com/documentation/corefoundation/cfrunloop
 [looper]: https://developer.android.com/reference/android/os/Looper
