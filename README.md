@@ -39,6 +39,23 @@ bare-build \
 | iOS      | `.app`                     | `.pkg`      | Mach-O executable with self-extracting `.framework` libraries |
 | Windows  | Plain directory            | `.msix`     | PE executable with self-extracting `.dll` libraries           |
 
+## Runtimes
+
+`bare-build` ships with portable runtimes for all supported systems. Similarly to the `bare` CLI, the portable runtimes are designed to run only the I/O event loop of Bare and they're therefore mostly suited for standalone CLI applications. That's why we refer to them as portable; the same code will run the same way across all systems. For developing native GUI applications, however, the portable runtimes fall short as such applications require tight integration with the native event loop of the corresponding system, such as [`CFRunLoop`][cfrunloop] in Core Foundation or [`Looper`][looper] in Android.
+
+[cfrunloop]: https://developer.apple.com/documentation/corefoundation/cfrunloop
+[looper]: https://developer.android.com/reference/android/os/Looper
+
+For that purpose, an alternative runtime can be specified via the `runtime` option or the `--runtime` flag. As with the portable runtimes, we maintain native runtimes for all supported systems.
+
+| Platform | Runtime                                                     | Usage                             |
+| :------- | :---------------------------------------------------------- | :-------------------------------- |
+| Linux    | [bare-gtk](https://github.com/holepunchto/bare-gtk)         | `runtime: 'bare-gtk/runtime'`     |
+| Android  | [bare-ndk](https://github.com/holepunchto/bare-ndk)         | `runtime: 'bare-ndk/runtime'`     |
+| macOS    | [bare-app-kit](https://github.com/holepunchto/bare-app-kit) | `runtime: 'bare-app-kit/runtime'` |
+| iOS      | [bare-ui-kit](https://github.com/holepunchto/bare-ui-kit)   | `runtime: 'bare-ui-kit/runtime'`  |
+| Windows  | [bare-win-ui](https://github.com/holepunchto/bare-win-ui)   | `runtime: 'bare-win-ui/runtime'`  |
+
 ## API
 
 #### `for await (const resource of build(entry[, preflight][, options]))`
