@@ -72,6 +72,7 @@ options = {
   identifier,
   manifest,
   resources,
+  compatibility,
   base: '.',
   hosts: [],
   out: '.',
@@ -118,6 +119,7 @@ Flags include:
 --identifier <id>                The unique application identifier
 --manifest <path>                The platform specific application manifest
 --resources <path>               The platform specific application resources
+--compatibility <name>           Apply compatibility patches (choices: snap)
 --base <path>                    The base path of the application (default: .)
 --host <host>                    The host to target
 --out|-o <dir>                   The output directory
