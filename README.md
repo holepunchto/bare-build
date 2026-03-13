@@ -85,6 +85,7 @@ options = {
   identity: 'Apple Development',
   applicationIdentity: identity,
   installerIdentity: identity,
+  provisioningProfile,
   keychain,
   entitlements,
   hardenedRuntime: false,
@@ -127,12 +128,13 @@ Flags include:
 --standalone                     Build a standalone executable
 --package                        Package the application for distribution
 --sign                           Sign the application
---identity <id>                  The macOS signing identity
---application-identity <id>      The macOS application signing identity
---installer-identity <id>        The macOS installer signing identity
---keychain <name>                The macOS signing keychain
---entitlements <path>            The macOS signing entitlements
---hardened-runtime               Enable the macOS hardened runtime
+--identity <id>                  The Apple signing identity
+--application-identity <id>      The Apple application signing identity
+--installer-identity <id>        The Apple installer signing identity
+--provisioning-profile <path>    The Apple provisioning profile
+--keychain <name>                The Apple signing keychain
+--entitlements <path>            The Apple signing entitlements
+--hardened-runtime               Enable the Apple hardened runtime
 --subject <id>                   The Windows signing subject
 --subject-name <name>            The Windows signing subject friendly name
 --thumbprint <sha1>              The Windows signing subject thumbprint
