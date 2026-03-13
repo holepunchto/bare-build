@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const process = require('process')
+const path = require('path')
 const { command, arg, flag, summary } = require('paparam')
 const pkg = require('./package')
 const build = require('.')
@@ -10,6 +11,7 @@ const cmd = command(
   arg('<entry>', 'The entry point of the app'),
   arg('[preflight]', 'The optional preflight entry point of the app'),
   flag('--version|-v', 'Print the current version'),
+  flag('--config <path>', 'Read configuration options from a module'),
   flag('--name|-n <name>', 'The application name'),
   flag('--author <name>', 'The name of the application author'),
   flag('--description <text>', 'The description of the application'),
@@ -43,6 +45,7 @@ const cmd = command(
     const { entry, preflight } = cmd.args
     let {
       version,
+      config,
       name,
       author,
       description,
@@ -76,6 +79,12 @@ const cmd = command(
 
     if (version) return console.log(`v${pkg.version}`)
 
+    if (config) {
+      config = require(path.resolve(config))
+
+      if ('default' in config) config = config.default
+    }
+
     try {
       for await (const _ of build(entry, preflight, {
         name,
@@ -106,7 +115,8 @@ const cmd = command(
         key,
         keystore,
         keystoreKey,
-        keystorePassword
+        keystorePassword,
+        ...config
       })) {
       }
     } catch (err) {

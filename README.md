@@ -113,6 +113,7 @@ Flags include:
 
 ```console
 --version|-v                     Print the current version
+--config <path>                  Read configuration options from a module
 --name|-n <name>                 The application name
 --author <name>                  The name of the application author
 --description <text>             The description of the application
