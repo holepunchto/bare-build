@@ -24,8 +24,8 @@ module.exports = async function* build(entry, preflight = null, opts = {}) {
 
   opts.name ||= pkg.name || 'App'
   opts.version ||= pkg.version || '1.0.0'
-  opts.description ||= pkg.description
-  opts.author ||= pkg.author
+  opts.description ||= pkg.description || ''
+  opts.author ||= pkg.author || ''
 
   if (typeof opts.runtime === 'string') {
     opts = { ...opts, runtime: await requireRelativeTo(opts.runtime, pathToFileURL(base + '/')) }
