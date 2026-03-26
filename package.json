@@ -1,6 +1,6 @@
 {
   "name": "bare-build",
-  "version": "0.4.6",
+  "version": "0.5.0",
   "description": "Application builder for Bare",
   "exports": {
     "./package": "./package.json",
