@@ -35,8 +35,10 @@
     "index.js",
     "bin.js",
     "CMakeLists.txt",
-    "lib",
-    "prebuilds"
+    "lib"
+  ],
+  "workspaces": [
+    "npm/*"
   ],
   "scripts": {
     "test": "prettier . --check && bare test.js"
@@ -52,6 +54,19 @@
   },
   "homepage": "https://github.com/holepunchto/bare-build#readme",
   "dependencies": {
+    "bare-build-android-arm": "^0.1.0",
+    "bare-build-android-arm64": "^0.1.0",
+    "bare-build-android-ia32": "^0.1.0",
+    "bare-build-android-x64": "^0.1.0",
+    "bare-build-darwin-arm64": "^0.1.0",
+    "bare-build-darwin-x64": "^0.1.0",
+    "bare-build-ios-arm64": "^0.1.0",
+    "bare-build-ios-arm64-simulator": "^0.1.0",
+    "bare-build-ios-x64-simulator": "^0.1.0",
+    "bare-build-linux-arm64": "^0.1.0",
+    "bare-build-linux-x64": "^0.1.0",
+    "bare-build-win32-arm64": "^0.1.0",
+    "bare-build-win32-x64": "^0.1.0",
     "bare-bundle-id": "^1.0.2",
     "bare-fs": "^4.5.1",
     "bare-lief": "^0.1.3",
@@ -65,8 +80,7 @@
     "bare-tpl": "^1.0.0",
     "bare-unpack": "^1.1.3",
     "bare-url": "^2.3.2",
-    "paparam": "^1.8.0",
-    "require-asset": "^1.1.0"
+    "paparam": "^1.8.0"
   },
   "optionalDependencies": {
     "bare-apk": "^0.1.2",

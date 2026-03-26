@@ -1,0 +1,27 @@
+{
+  "name": "bare-build-win32-x64",
+  "version": "0.1.0",
+  "description": "The Windows Intel 64-bit binary for portable Bare applications",
+  "exports": {
+    "./package": "./package.json",
+    ".": "./index.js"
+  },
+  "files": [
+    "NOTICE",
+    "index.js",
+    "bare.exe"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holepunchto/bare-build.git"
+  },
+  "author": "Holepunch",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/holepunchto/bare-build/issues"
+  },
+  "homepage": "https://github.com/holepunchto/bare-build",
+  "dependencies": {
+    "require-asset": "^1.0.2"
+  }
+}
