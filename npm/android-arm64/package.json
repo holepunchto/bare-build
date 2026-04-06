@@ -1,6 +1,6 @@
 {
   "name": "bare-build-android-arm64",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The Android ARM 64-bit binary for portable Bare applications",
   "exports": {
     "./package": "./package.json",
