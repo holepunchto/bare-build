@@ -1,6 +1,6 @@
 {
   "name": "bare-build-linux-arm64",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The Linux ARM 64-bit binary for portable Bare applications",
   "exports": {
     "./package": "./package.json",
