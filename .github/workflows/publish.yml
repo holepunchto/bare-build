@@ -91,5 +91,7 @@ jobs:
       - uses: holepunchto/actions/download-prebuilds@v1
         with:
           prefix: npm
-      - run: npm publish --ignore-scripts --workspaces --include-workspace-root
-      - uses: holepunchto/actions/create-release@v1
+      - uses: holepunchto/actions/publish@v1
+        with:
+          workspaces: true
+          include-workspace-root: true
