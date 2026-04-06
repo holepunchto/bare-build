@@ -59,7 +59,7 @@ const cmd = command(
       out,
       runtime,
       standalone,
-      package,
+      package: pkg,
       sign,
       identity,
       applicationIdentity,
@@ -100,7 +100,7 @@ const cmd = command(
         out,
         runtime,
         standalone,
-        package,
+        package: pkg,
         sign,
         identity,
         applicationIdentity,
@@ -118,6 +118,7 @@ const cmd = command(
         keystorePassword,
         ...config
       })) {
+        //
       }
     } catch (err) {
       if (err) console.error(err)
