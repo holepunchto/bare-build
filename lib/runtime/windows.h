@@ -35,7 +35,7 @@ bare__get_embedded_bundle(uv_buf_t *result) {
     memcpy(name, section->Name, 8);
 
     if (strcmp(name, ".bare") == 0) {
-      *result = uv_buf_init((char *) ((BYTE *) module + section->VirtualAddress), sections->Misc.VirtualSize);
+      *result = uv_buf_init((char *) ((BYTE *) module + section->VirtualAddress), section->Misc.VirtualSize);
 
       return 0;
     }
