@@ -6,8 +6,9 @@ const id = require('bare-bundle-id')
 const pack = require('bare-pack')
 const { readModule, listPrefix } = require('bare-pack/fs')
 const fs = require('./lib/fs')
+const constants = require('./lib/constants')
 
-module.exports = async function* build(entry, preflight = null, opts = {}) {
+module.exports = exports = async function* build(entry, preflight = null, opts = {}) {
   if (typeof preflight === 'object' && preflight !== null) {
     opts = preflight
     preflight = null
@@ -108,6 +109,8 @@ module.exports = async function* build(entry, preflight = null, opts = {}) {
     yield* platform(base, entry, preflight, { ...opts, hosts })
   }
 }
+
+exports.constants = constants
 
 async function requireRelativeTo(specifier, parentURL) {
   for await (const candidate of resolve(specifier, parentURL, readPackage)) {

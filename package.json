@@ -4,7 +4,8 @@
   "description": "Application builder for Bare",
   "exports": {
     "./package": "./package.json",
-    ".": "./index.js"
+    ".": "./index.js",
+    "./constants": "./lib/constants.js"
   },
   "imports": {
     "child_process": {
