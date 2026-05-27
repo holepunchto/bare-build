@@ -77,6 +77,22 @@ test('basic, darwin-arm64, package', { skip: !isMac }, async (t) => {
   t.alike(result.slice(-1), paths(['My App.pkg']))
 })
 
+test('basic, darwin-arm64, standalone', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'basic', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'basic'),
+    standalone: true,
+    hosts: ['darwin-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(result, paths(['my-app']))
+})
+
 test('basic, ios-arm64', async (t) => {
   const out = await t.tmp()
   const result = []
@@ -148,6 +164,22 @@ test('basic, ios-arm64, package', { skip: !isMac }, async (t) => {
   t.alike(result.slice(-1), paths(['My App.pkg']))
 })
 
+test('basic, ios-arm64, standalone', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'basic', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'basic'),
+    standalone: true,
+    hosts: ['ios-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(result, paths(['my-app']))
+})
+
 test('basic, linux-arm64', async (t) => {
   const out = await t.tmp()
   const result = []
@@ -217,6 +249,38 @@ test('basic, linux-arm64, package', { skip: !isLinux }, async (t) => {
   t.alike(result.slice(-1), paths(['My App.AppImage']))
 })
 
+test('basic, linux-arm64, standalone', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'basic', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'basic'),
+    standalone: true,
+    hosts: ['linux-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(result, paths(['my-app']))
+})
+
+test('basic, android-arm64, standalone', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'basic', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'basic'),
+    standalone: true,
+    hosts: ['android-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(result, paths(['my-app']))
+})
+
 test('basic, win32-arm64', async (t) => {
   const out = await t.tmp()
   const result = []
@@ -268,6 +332,22 @@ test('basic, win32-arm64, preflight', async (t) => {
       'My App'
     ])
   )
+})
+
+test('basic, win32-arm64, standalone', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'basic', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'basic'),
+    standalone: true,
+    hosts: ['win32-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(result, paths(['my-app.exe']))
 })
 
 test('addon, darwin-arm64', async (t) => {
