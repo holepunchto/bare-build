@@ -15,21 +15,55 @@ jobs:
     steps:
       - uses: holepunchto/actions/node-base@v1
       - run: npm run lint
-  test:
+  prebuild:
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
             platform: linux
             arch: x64
+          - os: ubuntu-24.04-arm
+            platform: linux
+            arch: arm64
+          - os: ubuntu-latest
+            platform: android
+            arch: x64
+          - os: ubuntu-latest
+            platform: android
+            arch: ia32
+          - os: ubuntu-latest
+            platform: android
+            arch: arm64
+          - os: ubuntu-latest
+            platform: android
+            arch: arm
+          - os: macos-latest
+            platform: darwin
+            arch: x64
           - os: macos-latest
             platform: darwin
             arch: arm64
+          - os: macos-latest
+            platform: ios
+            arch: arm64
+          - os: macos-latest
+            platform: ios
+            arch: arm64
+            tags: -simulator
+            flags: --simulator
+          - os: macos-latest
+            platform: ios
+            arch: x64
+            tags: -simulator
+            flags: --simulator
           - os: windows-latest
             platform: win32
             arch: x64
+          - os: windows-latest
+            platform: win32
+            arch: arm64
     runs-on: ${{ matrix.os }}
-    name: Test / ${{ matrix.platform }}-${{ matrix.arch }}
+    name: Build / ${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.tags }}
     steps:
       - uses: holepunchto/actions/bare-base@v1
       - uses: holepunchto/actions/setup-llvm@v1
@@ -39,6 +73,25 @@ jobs:
         with:
           platform: ${{ matrix.platform }}
           arch: ${{ matrix.arch }}
+          flags: ${{ matrix.flags }}
+          tags: ${{ matrix.tags}}
+          upload: true
+  test:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux
+          - os: macos-latest
+            platform: darwin
+          - os: windows-latest
+            platform: win32
+    runs-on: ${{ matrix.os }}
+    needs: prebuild
+    name: Test / ${{ matrix.platform }}
+    steps:
+      - uses: holepunchto/actions/bare-base@v1
+      - uses: holepunchto/actions/download-prebuilds@v1
+        with:
           prefix: npm
-          flags: --debug
       - run: npm test
