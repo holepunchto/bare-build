@@ -39,7 +39,8 @@
     "lib"
   ],
   "workspaces": [
-    "npm/*"
+    "npm/*",
+    "test/fixtures/*"
   ],
   "scripts": {
     "format": "prettier --write . && lunte --fix",
