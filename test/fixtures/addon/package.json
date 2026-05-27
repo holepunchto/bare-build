@@ -1,8 +1,11 @@
 {
   "private": true,
-  "name": "test-basic",
+  "name": "test-addon",
   "productName": "My App",
   "version": "1.2.3",
   "description": "An amazing app",
-  "author": "John Doe"
+  "author": "John Doe",
+  "dependencies": {
+    "bare-os": "3.9.1"
+  }
 }

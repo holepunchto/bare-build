@@ -23,7 +23,7 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
     pkg = {}
   }
 
-  opts.name ||= pkg.name || 'App'
+  opts.name ||= pkg.productName || pkg.name || 'App'
   opts.version ||= pkg.version || '1.0.0'
   opts.description ||= pkg.description || ''
   opts.author ||= pkg.author || ''
