@@ -69,6 +69,8 @@ options = {
   author: pkg.author,
   description: pkg.description,
   icon,
+  assetCatalog,
+  iconName: 'AppIcon',
   identifier,
   manifest,
   resources,
@@ -118,6 +120,8 @@ Flags include:
 --author <name>                  The name of the application author
 --description <text>             The description of the application
 --icon|-i <path>                 The application icon
+--asset-catalog <path>           The Apple asset catalog
+--icon-name <name>               The icon name within the Apple asset catalog
 --identifier <id>                The unique application identifier
 --manifest <path>                The platform specific application manifest
 --resources <path>               The platform specific application resources
