@@ -75,6 +75,7 @@ options = {
   infoPlist,
   androidManifest,
   appxManifest,
+  desktopEntry,
   resources,
   compatibility,
   base: '.',
@@ -128,6 +129,7 @@ Flags include:
 --info-plist <path>              The Apple Info.plist template
 --android-manifest <path>        The Android manifest template
 --appx-manifest <path>           The Windows AppxManifest.xml template
+--desktop-entry <path>           The Linux desktop entry template
 --resources <path>               The Android resources directory
 --compatibility <name>           Apply compatibility patches (choices: snap)
 --base <path>                    The base path of the application (default: .)
