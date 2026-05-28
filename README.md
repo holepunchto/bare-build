@@ -72,7 +72,10 @@ options = {
   assetCatalog,
   iconName: 'AppIcon',
   identifier,
-  manifest,
+  infoPlist,
+  androidManifest,
+  appxManifest,
+  desktopEntry,
   resources,
   compatibility,
   base: '.',
@@ -123,8 +126,11 @@ Flags include:
 --asset-catalog <path>           The Apple asset catalog
 --icon-name <name>               The icon name within the Apple asset catalog
 --identifier <id>                The unique application identifier
---manifest <path>                The platform specific application manifest
---resources <path>               The platform specific application resources
+--info-plist <path>              The Apple Info.plist template
+--android-manifest <path>        The Android manifest template
+--appx-manifest <path>           The Windows AppxManifest.xml template
+--desktop-entry <path>           The Linux desktop entry template
+--resources <path>               The Android resources directory
 --compatibility <name>           Apply compatibility patches (choices: snap)
 --base <path>                    The base path of the application (default: .)
 --host <host>                    The host to target
