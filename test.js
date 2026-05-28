@@ -297,7 +297,7 @@ test('basic, win32-arm64', async (t) => {
     result,
     paths([
       'My App/App/My App.exe',
-      'My App/Resources/app.bundle',
+      'My App/App/app.bundle',
       'My App/AppxManifest.xml',
       'My App/Assets/My App.png',
       'My App'
@@ -325,8 +325,8 @@ test('basic, win32-arm64, preflight', async (t) => {
     result,
     paths([
       'My App/App/My App.exe',
-      'My App/Resources/app.bundle',
-      'My App/Resources/preflight.bundle',
+      'My App/App/app.bundle',
+      'My App/App/preflight.bundle',
       'My App/AppxManifest.xml',
       'My App/Assets/My App.png',
       'My App'
@@ -448,7 +448,109 @@ test('addon, win32-arm64', async (t) => {
     paths([
       'My App/App/bare-os-3.9.1.dll',
       'My App/App/My App.exe',
-      'My App/Resources/app.bundle',
+      'My App/App/app.bundle',
+      'My App/AppxManifest.xml',
+      'My App/Assets/My App.png',
+      'My App'
+    ])
+  )
+})
+
+test('asset, darwin-arm64', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'asset', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'asset'),
+    hosts: ['darwin-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(
+    result,
+    paths([
+      'My App.app/Contents/MacOS/My App',
+      'My App.app/Contents/Info.plist',
+      'My App.app/Contents/PkgInfo',
+      'My App.app/Contents/Resources/app/foo.txt',
+      'My App.app/Contents/Resources/app.bundle',
+      'My App.app/Contents/Resources/app.png',
+      'My App.app'
+    ])
+  )
+})
+
+test('asset, ios-arm64', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'asset', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'asset'),
+    hosts: ['ios-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(
+    result,
+    paths([
+      'My App.app/My App',
+      'My App.app/Info.plist',
+      'My App.app/PkgInfo',
+      'My App.app/app/foo.txt',
+      'My App.app/app.bundle',
+      'My App.app/app.png',
+      'My App.app'
+    ])
+  )
+})
+
+test('asset, linux-arm64', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'asset', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'asset'),
+    hosts: ['linux-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(
+    result,
+    paths([
+      'My App.AppDir/usr/bin/my-app',
+      'My App.AppDir/usr/share/applications/My App.desktop',
+      'My App.AppDir/usr/share/my-app/app/foo.txt',
+      'My App.AppDir/usr/share/my-app/app.bundle',
+      'My App.AppDir/usr/share/icons/My App.png',
+      'My App.AppDir'
+    ])
+  )
+})
+
+test('asset, win32-arm64', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'asset', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'asset'),
+    hosts: ['win32-arm64']
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(
+    result,
+    paths([
+      'My App/App/My App.exe',
+      'My App/App/app/foo.txt',
+      'My App/App/app.bundle',
       'My App/AppxManifest.xml',
       'My App/Assets/My App.png',
       'My App'
