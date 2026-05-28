@@ -145,12 +145,16 @@ main(int argc, char *argv[]) {
     len = 4096;
 
     err = path_join(
-#if defined(BARE_PLATFORM_DARWIN) || defined(BARE_PLATFORM_WIN32)
-      (const char *[]) {bin, "..", "..", "Resources", "preflight.bundle", NULL},
-#elif defined(BARE_PLATFORM_IOS) || defined(BARE_PLATFORM_ANDROID)
-      (const char *[]) {bin, "..", "preflight.bundle", NULL},
+#if defined(BARE_PLATFORM_DARWIN)
+      (const char *[]){bin, "..", "..", "Resources", "preflight.bundle", NULL},
+#elif defined(BARE_PLATFORM_IOS)
+      (const char *[]){bin, "..", "preflight.bundle", NULL},
 #elif defined(BARE_PLATFORM_LINUX)
-      (const char *[]) {bin, "..", "..", "share", &bin[dir], "preflight.bundle", NULL},
+      (const char *[]){bin, "..", "..", "share", &bin[dir], "preflight.bundle", NULL},
+#elif defined(BARE_PLATFORM_ANDROID)
+      (const char *[]){bin, "..", "preflight.bundle", NULL},
+#elif defined(BARE_PLATFORM_WIN32)
+      (const char *[]){bin, "..", "preflight.bundle", NULL},
 #endif
       preflight,
       &len,
@@ -182,12 +186,16 @@ main(int argc, char *argv[]) {
     len = 4096;
 
     err = path_join(
-#if defined(BARE_PLATFORM_DARWIN) || defined(BARE_PLATFORM_WIN32)
-      (const char *[]) {bin, "..", "..", "Resources", "app.bundle", NULL},
+#if defined(BARE_PLATFORM_DARWIN)
+      (const char *[]){bin, "..", "..", "Resources", "app.bundle", NULL},
 #elif defined(BARE_PLATFORM_IOS) || defined(BARE_PLATFORM_ANDROID)
-      (const char *[]) {bin, "..", "app.bundle", NULL},
+      (const char *[]){bin, "..", "app.bundle", NULL},
 #elif defined(BARE_PLATFORM_LINUX)
-      (const char *[]) {bin, "..", "..", "share", &bin[dir], "app.bundle", NULL},
+      (const char *[]){bin, "..", "..", "share", &bin[dir], "app.bundle", NULL},
+#elif defined(BARE_PLATFORM_ANDROID)
+      (const char *[]){bin, "..", "app.bundle", NULL},
+#elif defined(BARE_PLATFORM_WIN32)
+      (const char *[]){bin, "..", "app.bundle", NULL},
 #endif
       entry,
       &len,

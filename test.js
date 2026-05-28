@@ -297,7 +297,7 @@ test('basic, win32-arm64', async (t) => {
     result,
     paths([
       'My App/App/My App.exe',
-      'My App/Resources/app.bundle',
+      'My App/App/app.bundle',
       'My App/AppxManifest.xml',
       'My App/Assets/My App.png',
       'My App'
@@ -325,8 +325,8 @@ test('basic, win32-arm64, preflight', async (t) => {
     result,
     paths([
       'My App/App/My App.exe',
-      'My App/Resources/app.bundle',
-      'My App/Resources/preflight.bundle',
+      'My App/App/app.bundle',
+      'My App/App/preflight.bundle',
       'My App/AppxManifest.xml',
       'My App/Assets/My App.png',
       'My App'
@@ -448,7 +448,7 @@ test('addon, win32-arm64', async (t) => {
     paths([
       'My App/App/bare-os-3.9.1.dll',
       'My App/App/My App.exe',
-      'My App/Resources/app.bundle',
+      'My App/App/app.bundle',
       'My App/AppxManifest.xml',
       'My App/Assets/My App.png',
       'My App'
@@ -549,8 +549,8 @@ test('asset, win32-arm64', async (t) => {
     result,
     paths([
       'My App/App/My App.exe',
-      'My App/Resources/app/foo.txt',
-      'My App/Resources/app.bundle',
+      'My App/App/app/foo.txt',
+      'My App/App/app.bundle',
       'My App/AppxManifest.xml',
       'My App/Assets/My App.png',
       'My App'
