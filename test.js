@@ -198,7 +198,7 @@ test('basic, linux-arm64', async (t) => {
       'My App.AppDir/usr/bin/my-app',
       'My App.AppDir/usr/share/applications/my-app.desktop',
       'My App.AppDir/usr/share/my-app/app.bundle',
-      'My App.AppDir/usr/share/icons/my-app.png',
+      'My App.AppDir/usr/share/icons/hicolor/1024x1024/apps/my-app.png',
       'My App.AppDir'
     ])
   )
@@ -227,7 +227,7 @@ test('basic, linux-arm64, preflight', async (t) => {
       'My App.AppDir/usr/share/applications/my-app.desktop',
       'My App.AppDir/usr/share/my-app/app.bundle',
       'My App.AppDir/usr/share/my-app/preflight.bundle',
-      'My App.AppDir/usr/share/icons/my-app.png',
+      'My App.AppDir/usr/share/icons/hicolor/1024x1024/apps/my-app.png',
       'My App.AppDir'
     ])
   )
@@ -425,7 +425,7 @@ test('addon, linux-arm64', async (t) => {
       'My App.AppDir/usr/bin/my-app',
       'My App.AppDir/usr/share/applications/my-app.desktop',
       'My App.AppDir/usr/share/my-app/app.bundle',
-      'My App.AppDir/usr/share/icons/my-app.png',
+      'My App.AppDir/usr/share/icons/hicolor/1024x1024/apps/my-app.png',
       'My App.AppDir'
     ])
   )
@@ -527,7 +527,7 @@ test('asset, linux-arm64', async (t) => {
       'My App.AppDir/usr/share/applications/my-app.desktop',
       'My App.AppDir/usr/share/my-app/app/foo.txt',
       'My App.AppDir/usr/share/my-app/app.bundle',
-      'My App.AppDir/usr/share/icons/my-app.png',
+      'My App.AppDir/usr/share/icons/hicolor/1024x1024/apps/my-app.png',
       'My App.AppDir'
     ])
   )
