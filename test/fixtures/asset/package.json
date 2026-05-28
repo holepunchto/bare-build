@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "name": "test-asset",
+  "productName": "My App",
+  "version": "1.2.3",
+  "description": "An amazing app",
+  "author": "John Doe"
+}
