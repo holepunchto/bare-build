@@ -14,7 +14,15 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
     preflight = null
   }
 
-  const { base = '.', hosts = [], standalone = false } = opts
+  const { base = '.', hosts = [], standalone = false, package: pkg = false } = opts
+
+  if (standalone && pkg) {
+    throw new Error('Options `standalone` and `package` are mutually exclusive')
+  }
+
+  if (preflight && standalone) {
+    throw new Error('Option `preflight` is not supported in standalone mode')
+  }
 
   let pkg
   try {
