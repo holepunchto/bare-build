@@ -14,13 +14,13 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
     preflight = null
   }
 
-  const { base = '.', hosts = [], standalone = false, package: pkg = false } = opts
+  const { base = '.', hosts = [] } = opts
 
-  if (standalone && pkg) {
+  if (opts.standalone && opts.package) {
     throw new Error('Options `standalone` and `package` are mutually exclusive')
   }
 
-  if (preflight && standalone) {
+  if (opts.standalone && preflight) {
     throw new Error('Option `preflight` is not supported in standalone mode')
   }
 
@@ -44,7 +44,7 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
     pathToFileURL(entry),
     {
       hosts,
-      linked: standalone === false,
+      linked: opts.standalone === false,
       resolve: traverse.resolve.bare
     },
     readModule,
