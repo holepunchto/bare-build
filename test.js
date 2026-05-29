@@ -299,7 +299,7 @@ test('basic, win32-arm64', async (t) => {
       'My App/App/My App.exe',
       'My App/App/app.bundle',
       'My App/AppxManifest.xml',
-      'My App/Assets/My App.png',
+      'My App/Assets/Logo.png',
       'My App'
     ])
   )
@@ -328,7 +328,7 @@ test('basic, win32-arm64, preflight', async (t) => {
       'My App/App/app.bundle',
       'My App/App/preflight.bundle',
       'My App/AppxManifest.xml',
-      'My App/Assets/My App.png',
+      'My App/Assets/Logo.png',
       'My App'
     ])
   )
@@ -450,7 +450,7 @@ test('addon, win32-arm64', async (t) => {
       'My App/App/My App.exe',
       'My App/App/app.bundle',
       'My App/AppxManifest.xml',
-      'My App/Assets/My App.png',
+      'My App/Assets/Logo.png',
       'My App'
     ])
   )
@@ -552,7 +552,7 @@ test('asset, win32-arm64', async (t) => {
       'My App/App/app/foo.txt',
       'My App/App/app.bundle',
       'My App/AppxManifest.xml',
-      'My App/Assets/My App.png',
+      'My App/Assets/Logo.png',
       'My App'
     ])
   )
