@@ -188,7 +188,7 @@ main(int argc, char *argv[]) {
     err = path_join(
 #if defined(BARE_PLATFORM_DARWIN)
       (const char *[]){bin, "..", "..", "Resources", "app.bundle", NULL},
-#elif defined(BARE_PLATFORM_IOS) || defined(BARE_PLATFORM_ANDROID)
+#elif defined(BARE_PLATFORM_IOS)
       (const char *[]){bin, "..", "app.bundle", NULL},
 #elif defined(BARE_PLATFORM_LINUX)
       (const char *[]){bin, "..", "..", "share", &bin[dir], "app.bundle", NULL},
