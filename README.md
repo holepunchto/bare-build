@@ -56,6 +56,30 @@ For that purpose, an alternative runtime can be specified via the `runtime` opti
 | iOS      | [bare-ui-kit](https://github.com/holepunchto/bare-ui-kit)   | `runtime: 'bare-ui-kit/runtime'`  | `--runtime bare-ui-kit/runtime`  |
 | Windows  | [bare-win-ui](https://github.com/holepunchto/bare-win-ui)   | `runtime: 'bare-win-ui/runtime'`  | `--runtime bare-win-ui/runtime`  |
 
+### Embedded bundles
+
+In `--standalone` mode, `bare-build` embeds the application bundle directly into the prebuilt executable. Custom runtimes must therefore expose a platform-specific anchor for the bundle that `bare-build` can locate and populate. The portable runtimes shipped with `bare-build` are good references for each platform.
+
+| Platform        | Format | Anchor                                                     | Notes                                                                                                              |
+| :-------------- | :----- | :--------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| Linux / Android | ELF    | Weak symbols `__bare_bundle_begin` and `__bare_bundle_end` | Declare as `extern char ...[] __attribute__((weak));`. `bare-build` adds a read-only segment and points them at it |
+| macOS / iOS     | Mach-O | Segment `__BARE`, section `__bundle`                       | `bare-build` adds the segment to the executable; read with `getsectiondata(&_mh_execute_header, "__BARE", ...)`    |
+| Windows         | PE     | Section `.bare`                                            | `bare-build` adds the section to the executable; locate it by iterating the section table at runtime               |
+
+### Application identifier
+
+In packaged mode on Linux, `bare-build` will optionally populate the `__bare_identifier` symbol with the value of `--identifier` if exposed by the runtime. This lets GTK runtimes pass the identifier to `gtk_application_new()` without recompiling. Declare it the same way as the bundle symbols:
+
+```c
+extern char __bare_identifier[] __attribute__((weak));
+```
+
+If the symbol is absent, `bare-build` leaves the executable untouched.
+
+### Windows subsystem
+
+On Windows, `bare-build` overwrites the PE `OptionalHeader.Subsystem` field of the prebuilt executable based on the packaging mode: `IMAGE_SUBSYSTEM_WINDOWS_CUI` for `--standalone` builds and `IMAGE_SUBSYSTEM_WINDOWS_GUI` for `--package` (MSIX) builds. Custom runtimes therefore can't lock in their own subsystem; link with either and `bare-build` will reset it to match the build mode.
+
 ## API
 
 #### `for await (const resource of build(entry[, preflight][, options]))`
