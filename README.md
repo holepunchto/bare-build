@@ -79,6 +79,9 @@ options = {
   categories: ['Utility'],
   resources,
   compatibility,
+  minimumVersion,
+  targetVersion,
+  language,
   base: '.',
   hosts: [],
   out: '.',
@@ -134,6 +137,9 @@ Flags include:
 --category <name>                A Linux desktop entry category
 --resources <path>               The Android resources directory
 --compatibility <name>           Apply compatibility patches (choices: snap)
+--minimum-version <version>      The minimum supported platform version
+--target-version <version>       The target platform version
+--language <code>                The Windows resource language code
 --base <path>                    The base path of the application (default: .)
 --host <host>                    The host to target
 --out|-o <dir>                   The output directory
