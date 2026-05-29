@@ -44,7 +44,7 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
     pathToFileURL(entry),
     {
       hosts,
-      linked: opts.standalone === false,
+      linked: opts.standalone !== true,
       resolve: traverse.resolve.bare
     },
     readModule,
