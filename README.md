@@ -76,6 +76,7 @@ options = {
   androidManifest,
   appxManifest,
   desktopEntry,
+  categories: ['Utility'],
   resources,
   compatibility,
   base: '.',
@@ -130,6 +131,7 @@ Flags include:
 --android-manifest <path>        The Android manifest template
 --appx-manifest <path>           The Windows AppxManifest.xml template
 --desktop-entry <path>           The Linux desktop entry template
+--category <name>                A Linux desktop entry category
 --resources <path>               The Android resources directory
 --compatibility <name>           Apply compatibility patches (choices: snap)
 --base <path>                    The base path of the application (default: .)
