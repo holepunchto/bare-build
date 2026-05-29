@@ -82,6 +82,7 @@
     "bare-os": "^3.6.2",
     "bare-pack": "^2.0.0",
     "bare-path": "^3.0.0",
+    "bare-semver": "^1.0.3",
     "bare-subprocess": "^5.1.5",
     "bare-tpl": "^1.0.0",
     "bare-unpack": "^1.1.3",
