@@ -6,7 +6,13 @@ find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
 
 project(bare_build C)
 
-fetch_package("github:holepunchto/bare@1.28.0")
+# TODO: Remove once bare-crypto and bare-tls releases that set this themselves
+# have propagated through Bare. BoringSSL otherwise configures
+# google/benchmark, whose regex-backend feature detection is fragile on
+# cross-compile.
+set(BUILD_TESTING OFF)
+
+fetch_package("github:holepunchto/bare@1.28.6")
 fetch_package("github:holepunchto/libpath")
 
 add_bare_bundle(
