@@ -59,9 +59,10 @@ jobs:
           - os: windows-2022
             platform: win32
             arch: x64
-          - os: windows-11-arm
-            platform: win32
-            arch: arm64
+          # TODO: uncomment to restore when socket supports it
+          # - os: windows-11-arm
+          #   platform: win32
+          #   arch: arm64
     runs-on: ${{ matrix.os }}
     name: Build / ${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.tags }}
     steps:
