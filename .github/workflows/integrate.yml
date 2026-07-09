@@ -59,14 +59,15 @@ jobs:
           - os: windows-2022
             platform: win32
             arch: x64
-          # TODO: uncomment to restore when socket supports it
-          # - os: windows-11-arm
-          #   platform: win32
-          #   arch: arm64
+          - os: windows-11-arm
+            platform: win32
+            arch: arm64
     runs-on: ${{ matrix.os }}
     name: Build / ${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.tags }}
     steps:
-      - uses: holepunchto/actions/bare-base@v1
+      # TODO: Revert back bare-base@v1 when socket support for win32-arm64 is added
+      - uses: holepunchto/actions/node-base@2ce22d5f422aadc7b3a2f7e16597a8a8bedb32cb
+      - uses: holepunchto/actions/setup-bare@v1
       - uses: holepunchto/actions/setup-llvm@v1
       - uses: holepunchto/actions/setup-nasm@v1
         if: ${{ matrix.platform == 'win32' }}
