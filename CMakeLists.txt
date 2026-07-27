@@ -81,6 +81,8 @@ link_bare_module(bare_runtime bare-fs)
 link_bare_module(bare_runtime bare-module)
 link_bare_module(bare_runtime bare-module-lexer)
 link_bare_module(bare_runtime bare-os)
+link_bare_module(bare_runtime bare-path)
+link_bare_module(bare_runtime bare-type-stripper)
 link_bare_module(bare_runtime bare-url)
 
 bare_target(target)
