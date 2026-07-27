@@ -3,12 +3,21 @@
 #include <windows.h>
 
 static inline void
-bare__prepare_main(void) {
-  if (GetConsoleWindow() == NULL) {
-    freopen("NUL", "r", stdin);
-    freopen("NUL", "w", stdout);
-    freopen("NUL", "w", stderr);
+bare__redirect_if_invalid(DWORD id, const char *mode, FILE *stream) {
+  HANDLE handle = GetStdHandle(id);
+
+  if (handle == NULL || handle == INVALID_HANDLE_VALUE) {
+    freopen("NUL", mode, stream);
   }
+}
+
+// Redirect only genuinely absent handles to NUL; a valid inherited pipe or
+// file (no console window) must be kept.
+static inline void
+bare__prepare_main(void) {
+  bare__redirect_if_invalid(STD_INPUT_HANDLE, "r", stdin);
+  bare__redirect_if_invalid(STD_OUTPUT_HANDLE, "w", stdout);
+  bare__redirect_if_invalid(STD_ERROR_HANDLE, "w", stderr);
 }
 
 static inline int

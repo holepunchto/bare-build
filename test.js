@@ -1,10 +1,22 @@
 const test = require('brittle')
 const path = require('path')
-const { isMac, isLinux } = require('which-runtime')
+const { isMac, isLinux, platform, arch } = require('which-runtime')
 const build = require('.')
-const { paths } = require('./test/helpers')
+const { paths, run } = require('./test/helpers')
 
 const fixtures = path.resolve(__dirname, 'test', 'fixtures')
+
+const host = `${platform}-${arch}`
+
+// The hosts whose executables this machine can also run
+const native = new Set([
+  'darwin-arm64',
+  'darwin-x64',
+  'linux-arm64',
+  'linux-x64',
+  'win32-arm64',
+  'win32-x64'
+])
 
 test('basic, darwin-arm64', async (t) => {
   const out = await t.tmp()
@@ -348,6 +360,30 @@ test('basic, win32-arm64, standalone', async (t) => {
   }
 
   t.alike(result, paths(['my-app.exe']))
+})
+
+// Runs the executable rather than just inspecting what was emitted: the runtime
+// may hold a valid stdout handle yet still redirect it away, which no assertion
+// about the built files can catch.
+test('basic, standalone, stdout', { skip: !native.has(host) }, async (t) => {
+  const out = await t.tmp()
+
+  let executable
+
+  for await (const resource of build(path.join(fixtures, 'basic', 'app.js'), {
+    out,
+    base: path.join(fixtures, 'basic'),
+    standalone: true,
+    hosts: [host]
+  })) {
+    executable = resource
+  }
+
+  const { code, stdout, stderr } = await run(executable)
+
+  t.is(stderr, '') // A crashing runtime still exits 0, so assert this first
+  t.is(code, 0)
+  t.is(stdout.trim(), 'Hello world')
 })
 
 test('addon, darwin-arm64', async (t) => {
