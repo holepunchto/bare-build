@@ -76,6 +76,7 @@ jobs:
     name: Publish
     steps:
       - uses: holepunchto/actions/node-base@v1
+      - run: node scripts/check-versions.js
       - uses: holepunchto/actions/download-prebuilds@v1
         with:
           prefix: npm
