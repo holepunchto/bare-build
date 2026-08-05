@@ -6,6 +6,6 @@
   "description": "An amazing app",
   "author": "John Doe",
   "dependencies": {
-    "bare-os": "3.9.1"
+    "bare-os": "3.9.3"
   }
 }
