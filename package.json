@@ -95,7 +95,7 @@
   },
   "devDependencies": {
     "bare-bundle": "^1.10.0",
-    "bare-module": "^6.1.2",
+    "bare-module": "^7.0.3",
     "brittle": "^4.1.0",
     "cmake-bare": "^1.6.5",
     "cmake-bare-bundle": "^3.0.0",
