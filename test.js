@@ -492,6 +492,33 @@ test('addon, win32-arm64', async (t) => {
   )
 })
 
+// Runs the executable rather than just inspecting what was emitted: addons are
+// unpacked from the bundle to disk at startup and can only be loaded from there
+// if the runtime forwards its own module protocol.
+//
+// The base is the repository root as the fixture's dependencies are hoisted
+// there, and everything the bundle references must live within the base.
+test('addon, standalone, load', { skip: !native.has(host) }, async (t) => {
+  const out = await t.tmp()
+
+  let executable
+
+  for await (const resource of build(path.join(fixtures, 'addon', 'app.js'), {
+    out,
+    base: __dirname,
+    standalone: true,
+    hosts: [host]
+  })) {
+    executable = resource
+  }
+
+  const { code, stdout, stderr } = await run(executable)
+
+  t.is(stderr, '') // A crashing runtime still exits 0, so assert this first
+  t.is(code, 0)
+  t.is(stdout.trim(), platform)
+})
+
 test('asset, darwin-arm64', async (t) => {
   const out = await t.tmp()
   const result = []

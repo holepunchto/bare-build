@@ -1,1 +1,1 @@
-console.log(require('bare-os'))
+console.log(require('bare-os').platform())
