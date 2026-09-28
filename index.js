@@ -5,6 +5,7 @@ const resolve = require('bare-module-resolve')
 const id = require('bare-bundle-id')
 const pack = require('bare-pack')
 const { readModule, listPrefix } = require('bare-pack/fs')
+const host = require('#host')
 const fs = require('./lib/fs')
 const constants = require('./lib/constants')
 
@@ -14,7 +15,7 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
     preflight = null
   }
 
-  const { base = '.', hosts = [] } = opts
+  const { base = '.', hosts = [host] } = opts
 
   if (opts.standalone && opts.package) {
     throw new Error('Options `standalone` and `package` are mutually exclusive')
