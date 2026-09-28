@@ -30,7 +30,7 @@ const cmd = command(
   flag('--target-version <version>', 'The target platform version'),
   flag('--language <code>', 'The Windows resource language code'),
   flag('--base <path>', 'The base path of the application').default('.'),
-  flag('--host <host>', 'The host to target').multiple(),
+  flag('--host <host>', 'The host to target (default: the current host)').multiple(),
   flag('--out|-o <dir>', 'The output directory'),
   flag('--runtime <specifier>', 'The runtime to use'),
   flag('--standalone', 'Build a standalone executable'),

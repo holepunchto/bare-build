@@ -8,6 +8,10 @@
     "./constants": "./lib/constants.js"
   },
   "imports": {
+    "#host": {
+      "bare": "./lib/host/bare.js",
+      "node": "./lib/host/node.js"
+    },
     "child_process": {
       "bare": "bare-subprocess",
       "default": "child_process"

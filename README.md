@@ -107,7 +107,7 @@ options = {
   targetVersion,
   language,
   base: '.',
-  hosts: [],
+  hosts: [host],
   out: '.',
   runtime,
   standalone: false,
@@ -165,7 +165,7 @@ Flags include:
 --target-version <version>       The target platform version
 --language <code>                The Windows resource language code
 --base <path>                    The base path of the application (default: .)
---host <host>                    The host to target
+--host <host>                    The host to target (default: the current host)
 --out|-o <dir>                   The output directory
 --runtime <specifier>            The runtime to use
 --standalone                     Build a standalone executable
