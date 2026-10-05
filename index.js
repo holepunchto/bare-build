@@ -41,36 +41,15 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
     opts = { ...opts, runtime: await requireRelativeTo(opts.runtime, pathToFileURL(base + '/')) }
   }
 
-  entry = await pack(
-    pathToFileURL(entry),
-    {
-      hosts,
-      linked: opts.standalone !== true,
-      resolve: traverse.resolve.bare
-    },
-    readModule,
-    listPrefix
-  )
+  const entries = [entry, preflight].filter(Boolean).map((entry) => path.resolve(entry))
 
-  entry = entry.unmount(pathToFileURL(base))
-
-  entry.id = id(entry).toString('hex')
+  // Linking only needs the entry points, so it doesn't wait for packing.
+  entry = packBundle(entry, { hosts, linked: opts.standalone !== true }, base)
+  entry.catch(noop)
 
   if (preflight) {
-    preflight = await pack(
-      pathToFileURL(preflight),
-      {
-        hosts,
-        linked: true,
-        resolve: traverse.resolve.bare
-      },
-      readModule,
-      listPrefix
-    )
-
-    preflight = preflight.unmount(pathToFileURL(base))
-
-    preflight.id = id(preflight).toString('hex')
+    preflight = packBundle(preflight, { hosts, linked: true }, base)
+    preflight.catch(noop)
   }
 
   const groups = new Map()
@@ -115,11 +94,26 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
   }
 
   for (const [platform, hosts] of groups) {
-    yield* platform(base, entry, preflight, { ...opts, hosts })
+    yield* platform(entries, entry, preflight, { ...opts, hosts })
   }
 }
 
 exports.constants = constants
+
+async function packBundle(entry, opts, base) {
+  const bundle = await pack(
+    pathToFileURL(entry),
+    { ...opts, resolve: traverse.resolve.bare },
+    readModule,
+    listPrefix
+  )
+
+  const unmounted = bundle.unmount(pathToFileURL(base))
+
+  unmounted.id = id(unmounted).toString('hex')
+
+  return unmounted
+}
 
 async function requireRelativeTo(specifier, parentURL) {
   for await (const candidate of resolve(specifier, parentURL, readPackage)) {
@@ -138,3 +132,5 @@ async function readPackage(url) {
     return null
   }
 }
+
+function noop() {}
