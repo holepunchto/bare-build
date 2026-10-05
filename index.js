@@ -42,13 +42,14 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
   }
 
   const entries = [entry, preflight].filter(Boolean).map((entry) => path.resolve(entry))
+  const deferUnresolved = opts.deferUnresolved === true
 
   // Linking only needs the entry points, so it doesn't wait for packing.
-  entry = packBundle(entry, { hosts, linked: opts.standalone !== true }, base)
+  entry = packBundle(entry, { hosts, linked: opts.standalone !== true, deferUnresolved }, base)
   entry.catch(noop)
 
   if (preflight) {
-    preflight = packBundle(preflight, { hosts, linked: true }, base)
+    preflight = packBundle(preflight, { hosts, linked: true, deferUnresolved }, base)
     preflight.catch(noop)
   }
 
