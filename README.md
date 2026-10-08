@@ -138,6 +138,16 @@ options = {
 }
 ```
 
+#### `for await (const resource of standalone(entry[, options]))`
+
+Build standalone executables only, equivalent to `build(entry, { standalone: true })`. Importing `bare-build/standalone` leaves out the code for packaged and unpackaged builds, which keeps bundles of tools that only need standalone executables small.
+
+```js
+const standalone = require('bare-build/standalone')
+```
+
+Options are the same as for `build()`, minus those that only apply to packaged and unpackaged builds.
+
 ## CLI
 
 #### `bare-build [flags] <entry>`
