@@ -5,12 +5,47 @@
   "exports": {
     "./package": "./package.json",
     ".": "./index.js",
+    "./standalone": "./standalone.js",
     "./constants": "./lib/constants.js"
   },
   "imports": {
     "#host": {
       "bare": "./lib/host/bare.js",
       "node": "./lib/host/node.js"
+    },
+    "#apk": {
+      "bare": {
+        "darwin": [
+          "bare-apk",
+          "./lib/apk/unsupported.js"
+        ],
+        "linux": {
+          "x64": [
+            "bare-apk",
+            "./lib/apk/unsupported.js"
+          ],
+          "default": "./lib/apk/unsupported.js"
+        },
+        "win32": {
+          "x64": [
+            "bare-apk",
+            "./lib/apk/unsupported.js"
+          ],
+          "default": "./lib/apk/unsupported.js"
+        },
+        "default": "./lib/apk/unsupported.js"
+      },
+      "default": "bare-apk"
+    },
+    "#app-image": {
+      "bare": {
+        "linux": [
+          "bare-app-image",
+          "./lib/app-image/unsupported.js"
+        ],
+        "default": "./lib/app-image/unsupported.js"
+      },
+      "default": "./lib/app-image/node.js"
     },
     "child_process": {
       "bare": "bare-subprocess",
@@ -38,6 +73,7 @@
   },
   "files": [
     "index.js",
+    "standalone.js",
     "bin.js",
     "CMakeLists.txt",
     "lib"
