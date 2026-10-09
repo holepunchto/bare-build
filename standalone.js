@@ -14,11 +14,11 @@ const platforms = {
 module.exports = exports = async function* build(entry, opts = {}) {
   opts = await resolveOptions(opts)
 
-  const { base, hosts } = opts
+  const { base, hosts, defer } = opts
 
   const groups = groupHosts(hosts, platforms)
 
-  const bundle = packBundle(path.resolve(entry), { hosts, linked: false }, base)
+  const bundle = packBundle(path.resolve(entry), { hosts, linked: false, defer }, base)
   bundle.catch(noop)
 
   for (const [platform, hosts] of groups) {
