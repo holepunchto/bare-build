@@ -110,6 +110,7 @@ options = {
   hosts: [host],
   out: '.',
   runtime,
+  defer,
   standalone: false,
   package: false,
   sign: false,

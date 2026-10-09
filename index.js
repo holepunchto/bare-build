@@ -30,18 +30,18 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
 
   opts = await resolveOptions(opts)
 
-  const { base, hosts } = opts
+  const { base, hosts, defer } = opts
 
   const groups = groupHosts(hosts, platforms)
 
   const entries = [entry, preflight].filter(Boolean).map((entry) => path.resolve(entry))
 
   // Linking only needs the entry points, so it doesn't wait for packing.
-  entry = packBundle(entry, { hosts, linked: true }, base)
+  entry = packBundle(entry, { hosts, linked: true, defer }, base)
   entry.catch(noop)
 
   if (preflight) {
-    preflight = packBundle(preflight, { hosts, linked: true }, base)
+    preflight = packBundle(preflight, { hosts, linked: true, defer }, base)
     preflight.catch(noop)
   }
 
