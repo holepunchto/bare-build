@@ -25,16 +25,20 @@ module.exports = exports = async function* build(entry, preflight = null, opts =
   if (opts.standalone) {
     if (preflight) throw new Error('Option `preflight` is not supported in standalone mode')
 
+    if (opts.link && opts.link.length > 0) {
+      throw new Error('Option `link` is not supported in standalone mode')
+    }
+
     return yield* standalone(entry, opts)
   }
 
   opts = await resolveOptions(opts)
 
-  const { base, hosts, defer } = opts
+  const { base, hosts, defer, link = [] } = opts
 
   const groups = groupHosts(hosts, platforms)
 
-  const entries = [entry, preflight].filter(Boolean).map((entry) => path.resolve(entry))
+  const entries = [entry, preflight, ...link].filter(Boolean).map((entry) => path.resolve(entry))
 
   // Linking only needs the entry points, so it doesn't wait for packing.
   entry = packBundle(entry, { hosts, linked: true, defer }, base)

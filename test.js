@@ -414,6 +414,35 @@ test('addon, darwin-arm64', async (t) => {
   )
 })
 
+test('addon, darwin-arm64, link', async (t) => {
+  const out = await t.tmp()
+  const result = []
+
+  for await (const resource of build(path.join(fixtures, 'addon', 'host.js'), {
+    out,
+    base: path.join(fixtures, 'addon'),
+    hosts: ['darwin-arm64'],
+    link: [path.join(fixtures, 'addon', 'app.js')]
+  })) {
+    result.push(path.relative(out, resource))
+  }
+
+  t.alike(
+    result,
+    paths([
+      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework/Versions/A/bare-os.3.9.3',
+      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework/Versions/A/Resources/Info.plist',
+      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework',
+      'My App.app/Contents/MacOS/My App',
+      'My App.app/Contents/Info.plist',
+      'My App.app/Contents/PkgInfo',
+      'My App.app/Contents/Resources/app.bundle',
+      'My App.app/Contents/Resources/app.png',
+      'My App.app'
+    ])
+  )
+})
+
 test('addon, ios-arm64', async (t) => {
   const out = await t.tmp()
   const result = []
