@@ -111,6 +111,7 @@ options = {
   out: '.',
   runtime,
   defer,
+  link: [],
   standalone: false,
   package: false,
   sign: false,
@@ -138,6 +139,8 @@ options = {
   keystorePassword
 }
 ```
+
+`link` lists modules whose addons are linked into the application without the modules themselves being bundled. Use it for code the application loads by other means, such as a bundle it reads at runtime.
 
 #### `for await (const resource of standalone(entry[, options]))`
 
@@ -179,6 +182,7 @@ Flags include:
 --host <host>                    The host to target (default: the current host)
 --out|-o <dir>                   The output directory
 --runtime <specifier>            The runtime to use
+--link <path>                    A module whose addons to link without bundling it
 --standalone                     Build a standalone executable
 --package                        Package the application for distribution
 --sign                           Sign the application
