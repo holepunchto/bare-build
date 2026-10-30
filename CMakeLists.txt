@@ -50,6 +50,13 @@ set_target_properties(
   WINDOWS_EXPORT_ALL_SYMBOLS ON
 )
 
+# Store the rpath as `RPATH` rather than the newer `RUNPATH`, so that
+# `$ORIGIN/../lib` is searched by every `dlopen()` in the process, not only by
+# those the runtime makes itself.
+if(LINUX)
+  target_link_options(bare_runtime PRIVATE -Wl,--disable-new-dtags)
+endif()
+
 target_link_libraries(
   bare_runtime
   PUBLIC
