@@ -1,9 +1,13 @@
 [
+  { "addon": "bare-buffer" },
   { "addon": "bare-fs" },
+  { "addon": "bare-hrtime" },
   { "addon": "bare-module" },
   { "addon": "bare-module-lexer" },
   { "addon": "bare-os" },
   { "addon": "bare-path" },
+  { "addon": "bare-sleep" },
+  { "addon": "bare-type" },
   { "addon": "bare-type-stripper" },
   { "addon": "bare-url" }
 ]

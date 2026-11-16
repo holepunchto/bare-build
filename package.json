@@ -120,7 +120,7 @@
     "bare-module-resolve": "^1.12.0",
     "bare-module-traverse": "^2.0.0",
     "bare-os": "^3.6.2",
-    "bare-pack": "^2.0.0",
+    "bare-pack": "^3.1.0",
     "bare-path": "^3.1.1",
     "bare-semver": "^1.0.3",
     "bare-subprocess": "^6.1.0",
