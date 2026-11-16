@@ -6,7 +6,7 @@ find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
 
 project(bare_build C)
 
-fetch_package("github:holepunchto/bare@1.35.0")
+fetch_package("github:holepunchto/bare@1.37.1")
 fetch_package("github:holepunchto/libpath")
 
 add_bare_bundle(
@@ -47,7 +47,6 @@ set_target_properties(
   INSTALL_RPATH "${bare_runtime_rpath}"
   BUILD_WITH_INSTALL_RPATH ON
   ENABLE_EXPORTS ON
-  WINDOWS_EXPORT_ALL_SYMBOLS ON
 )
 
 # Store the rpath as `RPATH` rather than the newer `RUNPATH`, so that
@@ -62,9 +61,24 @@ target_link_libraries(
   PUBLIC
     $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
   PRIVATE
+    bare::exports
     rlimit_static
     path_static
 )
+
+if(APPLE)
+  target_link_options(
+    bare_runtime
+    PRIVATE
+      $<$<CONFIG:Release>:-Wl,-dead_strip,-S,-x>
+  )
+elseif(LINUX OR ANDROID)
+  target_link_options(
+    bare_runtime
+    PRIVATE
+      $<$<CONFIG:Release>:-Wl,--gc-sections,--strip-all>
+  )
+endif()
 
 if(WIN32)
   file(READ "package.json" pkg)
@@ -85,12 +99,7 @@ if(WIN32)
 endif()
 
 link_bare_module(bare_runtime bare-fs)
-link_bare_module(bare_runtime bare-module)
-link_bare_module(bare_runtime bare-module-lexer)
 link_bare_module(bare_runtime bare-os)
-link_bare_module(bare_runtime bare-path)
-link_bare_module(bare_runtime bare-type-stripper)
-link_bare_module(bare_runtime bare-url)
 
 bare_target(target)
 

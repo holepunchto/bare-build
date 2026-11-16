@@ -1,6 +1,7 @@
 const test = require('brittle')
 const path = require('path')
 const { isMac, isLinux, platform, arch } = require('which-runtime')
+const { version: os } = require('bare-os')
 const build = require('.')
 const { paths, run } = require('./test/helpers')
 
@@ -401,9 +402,9 @@ test('addon, darwin-arm64', async (t) => {
   t.alike(
     result,
     paths([
-      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework/Versions/A/bare-os.3.9.3',
-      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework/Versions/A/Resources/Info.plist',
-      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework',
+      `My App.app/Contents/Frameworks/bare-os.${os}.framework/Versions/A/bare-os.${os}`,
+      `My App.app/Contents/Frameworks/bare-os.${os}.framework/Versions/A/Resources/Info.plist`,
+      `My App.app/Contents/Frameworks/bare-os.${os}.framework`,
       'My App.app/Contents/MacOS/My App',
       'My App.app/Contents/Info.plist',
       'My App.app/Contents/PkgInfo',
@@ -430,9 +431,9 @@ test('addon, darwin-arm64, link', async (t) => {
   t.alike(
     result,
     paths([
-      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework/Versions/A/bare-os.3.9.3',
-      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework/Versions/A/Resources/Info.plist',
-      'My App.app/Contents/Frameworks/bare-os.3.9.3.framework',
+      `My App.app/Contents/Frameworks/bare-os.${os}.framework/Versions/A/bare-os.${os}`,
+      `My App.app/Contents/Frameworks/bare-os.${os}.framework/Versions/A/Resources/Info.plist`,
+      `My App.app/Contents/Frameworks/bare-os.${os}.framework`,
       'My App.app/Contents/MacOS/My App',
       'My App.app/Contents/Info.plist',
       'My App.app/Contents/PkgInfo',
@@ -458,9 +459,9 @@ test('addon, ios-arm64', async (t) => {
   t.alike(
     result,
     paths([
-      'My App.app/Frameworks/bare-os.3.9.3.framework/bare-os.3.9.3',
-      'My App.app/Frameworks/bare-os.3.9.3.framework/Info.plist',
-      'My App.app/Frameworks/bare-os.3.9.3.framework',
+      `My App.app/Frameworks/bare-os.${os}.framework/bare-os.${os}`,
+      `My App.app/Frameworks/bare-os.${os}.framework/Info.plist`,
+      `My App.app/Frameworks/bare-os.${os}.framework`,
       'My App.app/My App',
       'My App.app/Info.plist',
       'My App.app/PkgInfo',
@@ -486,7 +487,7 @@ test('addon, linux-arm64', async (t) => {
   t.alike(
     result,
     paths([
-      'My App.AppDir/usr/lib/libbare-os.3.9.3.so',
+      `My App.AppDir/usr/lib/libbare-os.${os}.so`,
       'My App.AppDir/usr/bin/my-app',
       'My App.AppDir/usr/share/applications/my-app.desktop',
       'My App.AppDir/usr/share/my-app/app.bundle',
@@ -511,7 +512,7 @@ test('addon, win32-arm64', async (t) => {
   t.alike(
     result,
     paths([
-      'My App/App/bare-os-3.9.3.dll',
+      `My App/App/bare-os-${os}.dll`,
       'My App/App/My App.exe',
       'My App/App/app.bundle',
       'My App/AppxManifest.xml',
