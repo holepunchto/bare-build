@@ -1,7 +1,7 @@
 const test = require('brittle')
 const path = require('path')
 const { isMac, isLinux, platform, arch } = require('which-runtime')
-const { version: os } = require('bare-os')
+const { version: os } = require('bare-os/package')
 const build = require('.')
 const { paths, run } = require('./test/helpers')
 
